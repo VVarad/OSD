@@ -314,7 +314,7 @@ export function initRegistration() {
       }
     } catch (err) {
       showGeneralError(
-        err.message || 'Something went wrong while conjuring your registration. Please try again.'
+        err.message || 'Something went wrong while conjuring your registration. Please try again.',
       );
 
       // Re-enable form

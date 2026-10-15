@@ -9,7 +9,10 @@ const SUPABASE_TABLE = (import.meta.env.VITE_SUPABASE_TABLE || 'registrations').
 
 // --- Diagnostic: confirm env is loaded by Vite (safe: never logs key values) ---
 console.log('[Supabase] VITE_SUPABASE_URL present:', Boolean(import.meta.env.VITE_SUPABASE_URL));
-console.log('[Supabase] VITE_SUPABASE_ANON_KEY present:', Boolean(import.meta.env.VITE_SUPABASE_ANON_KEY));
+console.log(
+  '[Supabase] VITE_SUPABASE_ANON_KEY present:',
+  Boolean(import.meta.env.VITE_SUPABASE_ANON_KEY),
+);
 console.log('[Supabase] Table:', SUPABASE_TABLE);
 
 /**
@@ -42,7 +45,7 @@ export function isSupabaseConfigured() {
 export async function insertRegistrationToSupabase(data) {
   if (!isSupabaseConfigured()) {
     throw new Error(
-      'Supabase is not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your .env file.'
+      'Supabase is not configured. Please add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to your .env file.',
     );
   }
 
@@ -91,7 +94,11 @@ export async function insertRegistrationToSupabase(data) {
       const errJson = await response.json();
       errorDetail = errJson.message || errJson.details || errJson.hint || '';
       errorCode = errJson.code || '';
-      console.error('[Supabase] Insert error:', { status: response.status, code: errorCode, message: errorDetail });
+      console.error('[Supabase] Insert error:', {
+        status: response.status,
+        code: errorCode,
+        message: errorDetail,
+      });
     } catch {
       // ignore json parse error
     }
@@ -100,7 +107,7 @@ export async function insertRegistrationToSupabase(data) {
     if (errorCode === '42501' || response.status === 401 || response.status === 403) {
       throw new Error(
         'Database permission error: Row Level Security is blocking this insert. ' +
-        'Run the SQL policy in your Supabase SQL Editor to allow anonymous registrations.'
+          'Run the SQL policy in your Supabase SQL Editor to allow anonymous registrations.',
       );
     }
 
@@ -110,12 +117,12 @@ export async function insertRegistrationToSupabase(data) {
 
     if (response.status === 404) {
       throw new Error(
-        `Table "${SUPABASE_TABLE}" was not found in Supabase. Please create the table in your Supabase SQL editor.`
+        `Table "${SUPABASE_TABLE}" was not found in Supabase. Please create the table in your Supabase SQL editor.`,
       );
     }
 
     throw new Error(
-      errorDetail || `Registration failed with server status ${response.status}. Please try again.`
+      errorDetail || `Registration failed with server status ${response.status}. Please try again.`,
     );
   }
 
