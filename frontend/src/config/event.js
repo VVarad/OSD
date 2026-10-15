@@ -7,7 +7,7 @@ export const EVENT = {
   startsAt: '2026-10-25T09:00:00+05:30',
 
   /** Where every "Register" button points. Replace with the form URL once it exists. */
-  registerUrl: '#register',
+  registerUrl: '/register.html',
 
   /** Footer links. Empty string = link stays hidden-safe ("#"). */
   socials: {
