@@ -30,6 +30,8 @@
   box-shadow: 0 2px 0 var(--c-pumpkin-deep);
 }
 .btn--ghost {
+  background: transparent;
+  cursor: pointer;
   border: 2px solid rgb(246 240 255 / 0.4);
   color: var(--c-text);
   font-weight: 600;
@@ -84,10 +86,12 @@
   font-weight: 600;
   color: var(--c-candle);
 }
-.stop__label svg {
-  width: 28px;
-  height: 34px;
+.stop__lantern {
   flex: none;
+  rotate: -2deg; /* the source image leans ~2° right */
+  width: auto;
+  height: 34px;
+  animation: flicker 2.6s ease-in-out infinite;
 }
 .stop__title {
   font-family: var(--font-display);

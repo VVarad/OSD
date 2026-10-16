@@ -11,18 +11,62 @@
 }
 
 /* Invisible click areas over each house */
+.village__frame {
+  position: relative;
+}
+.village__img {
+  position: relative;
+  z-index: 1;
+}
+/* Click areas over each house (transparent; the glow sits behind the picture) */
 .village__spot {
   position: absolute;
+  z-index: 2;
   padding: 0;
   border: 0;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(255 170 60 / 0), rgb(255 170 60 / 0));
+  background: none;
   cursor: pointer;
-  transition: background 0.3s ease;
 }
-.village__spot:hover,
-.village__spot[aria-expanded='true'] {
-  background: radial-gradient(closest-side, rgb(255 170 60 / 0.28), rgb(255 170 60 / 0));
+/* Warm light from behind each house, shown on hover or while its topics are open */
+.village__glow {
+  position: absolute;
+  z-index: 0;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  translate: -50% -50%;
+  background: radial-gradient(
+    closest-side,
+    rgb(255 170 60 / 0.42),
+    rgb(255 140 40 / 0.16) 55%,
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.village__glow--one {
+  left: 14%;
+  top: 72%;
+  width: 30%;
+}
+.village__glow--two {
+  left: 82%;
+  top: 46%;
+  width: 34%;
+}
+.village__stage:has(
+    .village__spot--one:hover,
+    .sign--one:hover,
+    [aria-controls='session-1'][aria-expanded='true']
+  )
+  .village__glow--one,
+.village__stage:has(
+    .village__spot--two:hover,
+    .sign--two:hover,
+    [aria-controls='session-2'][aria-expanded='true']
+  )
+  .village__glow--two {
+  opacity: 1;
 }
 .village__spot--one {
   left: 0;
@@ -31,15 +75,16 @@
   height: 50%;
 }
 .village__spot--two {
-  left: 67%;
-  top: 14%;
-  width: 33%;
-  height: 56%;
+  left: 66%;
+  top: 4%;
+  width: 34%;
+  height: 70%;
 }
 
 /* Wooden-sign buttons */
 .sign {
   position: absolute;
+  z-index: 3;
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -103,7 +148,7 @@
 }
 .sign--two {
   left: 84%;
-  top: 72%;
+  top: 76%;
 }
 
 .village__hint {
@@ -203,6 +248,29 @@
 }
 
 @media (max-width: 700px) {
+  /* On phones the signs sit in a row under the picture instead of over the houses. */
+  .village__stage {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* each sign sits under its own house */
+    gap: 14px;
+    padding-inline: 2%;
+  }
+  .village__frame {
+    flex: 0 0 100%;
+    margin-inline: -2%;
+  }
+  .sign {
+    position: relative;
+    inset: auto;
+    translate: none;
+  }
+  .scroll--one::before {
+    --arrow: 30%;
+  }
+  .scroll--two::before {
+    --arrow: 70%;
+  }
   .sign {
     padding: 7px 12px 8px;
   }

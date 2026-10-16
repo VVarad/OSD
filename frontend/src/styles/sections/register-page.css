@@ -56,7 +56,8 @@
   padding: 24px var(--gutter) 16px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 12px;
 }
 
 .register-page__brand {
@@ -630,6 +631,18 @@
 
 .register-success-card__actions .btn {
   width: 100%;
+}
+
+/* Secondary action: violet "spirit" style to match the site */
+.register-success-card__actions .btn--ghost {
+  border-color: rgb(201 168 255 / 0.5);
+  background: rgb(138 77 255 / 0.16);
+  color: var(--c-text);
+}
+.register-success-card__actions .btn--ghost:hover {
+  border-color: var(--c-violet-soft);
+  background: rgb(138 77 255 / 0.28);
+  color: var(--c-text);
 }
 
 /* Footer on Registration Page */
