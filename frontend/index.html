@@ -42,19 +42,7 @@
 
     <!-- Shared SVG symbols -->
     <svg width="0" height="0" class="sr-only" aria-hidden="true" focusable="false">
-      <defs>
-        <radialGradient id="lantern-glow" cx="50%" cy="45%" r="60%">
-          <stop offset="0" stop-color="#fff8d2" />
-          <stop offset="0.45" stop-color="#ffd15c" />
-          <stop offset="1" stop-color="#ff8a24" />
-        </radialGradient>
-      </defs>
-      <symbol id="icon-lantern" viewBox="0 0 40 48">
-        <path d="M13 8 C13 2 27 2 27 8" stroke="#8a6bc9" stroke-width="3" fill="none" />
-        <rect x="10" y="8" width="20" height="6" rx="2" fill="#3b2366" />
-        <rect x="8" y="14" width="24" height="24" rx="9" fill="url(#lantern-glow)" />
-        <rect x="10" y="38" width="20" height="6" rx="2" fill="#3b2366" />
-      </symbol>
+      <defs></defs>
       <symbol id="icon-paw" viewBox="0 0 24 24">
         <ellipse cx="12" cy="16" rx="6" ry="5" />
         <circle cx="5" cy="9" r="2.4" />
@@ -67,7 +55,9 @@
     <!-- ============ NAV ============ -->
     <header class="site-header">
       <nav class="nav container" aria-label="Main">
-        <a class="nav__brand" href="#top">WLUG</a>
+        <a class="nav__brand" href="#top" aria-label="WLUG home"
+          ><img src="/assets/images/wlug-logo.webp" alt="WLUG" width="188" height="96"
+        /></a>
         <ul class="nav__links">
           <li><a href="#curriculum">Curriculum</a></li>
           <li><a href="#schedule">Schedule</a></li>
@@ -219,8 +209,13 @@
           <div class="stop__head stop__head--split">
             <div>
               <p class="stop__label">
-                <svg class="anim-flicker" aria-hidden="true"><use href="#icon-lantern" /></svg>Stop
-                1 of 5: the curriculum
+                <img
+                  class="stop__lantern"
+                  src="/assets/images/lantern-icon.webp"
+                  alt=""
+                  width="73"
+                  height="120"
+                />Stop 1: the curriculum
               </p>
               <h2 class="stop__title">The spellbook</h2>
             </div>
@@ -233,31 +228,35 @@
 
           <div class="village" data-sessions>
             <div class="village__stage">
-              <img
-                class="village__img"
-                src="/assets/images/pumpkin-village.webp"
-                alt="Two cute 3D pumpkin houses connected by a string of glowing lanterns"
-                width="1800"
-                height="1047"
-                loading="lazy"
-                decoding="async"
-              />
-              <button
-                type="button"
-                class="village__spot village__spot--one"
-                data-session-trigger="session-1"
-                aria-expanded="false"
-                aria-controls="session-1"
-                aria-label="Session 1, Microservices: show topics"
-              ></button>
-              <button
-                type="button"
-                class="village__spot village__spot--two"
-                data-session-trigger="session-2"
-                aria-expanded="false"
-                aria-controls="session-2"
-                aria-label="Session 2, Git and GitHub: show topics"
-              ></button>
+              <div class="village__frame">
+                <span class="village__glow village__glow--one" aria-hidden="true"></span>
+                <span class="village__glow village__glow--two" aria-hidden="true"></span>
+                <img
+                  class="village__img"
+                  src="/assets/images/pumpkin-village.webp"
+                  alt="Two cute 3D pumpkin houses connected by a string of glowing lanterns"
+                  width="1348"
+                  height="736"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <button
+                  type="button"
+                  class="village__spot village__spot--one"
+                  data-session-trigger="session-1"
+                  aria-expanded="false"
+                  aria-controls="session-1"
+                  aria-label="Session 1, Microservices: show topics"
+                ></button>
+                <button
+                  type="button"
+                  class="village__spot village__spot--two"
+                  data-session-trigger="session-2"
+                  aria-expanded="false"
+                  aria-controls="session-2"
+                  aria-label="Session 2, Git and GitHub: show topics"
+                ></button>
+              </div>
               <button
                 type="button"
                 class="sign sign--one"
@@ -433,52 +432,68 @@
         <div class="container schedule">
           <div class="schedule__main">
             <p class="stop__label">
-              <svg class="anim-flicker" aria-hidden="true"><use href="#icon-lantern" /></svg>Stop 2
-              of 5: the schedule
+              <img
+                class="stop__lantern"
+                src="/assets/images/lantern-icon.webp"
+                alt=""
+                width="73"
+                height="120"
+              />Stop 2: the schedule
             </p>
             <h2 class="stop__title">The lantern trail</h2>
 
-            <ol class="trail">
-              <li class="trail__item" style="--i: 0">
-                <img
-                  class="trail__lantern"
-                  src="/assets/images/lantern-small.webp"
-                  alt=""
-                  width="52"
-                  height="150"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span class="trail__time">10:00 AM</span>
-                <span class="trail__title">Session 1: Microservices</span>
-              </li>
-              <li class="trail__item" style="--i: 1">
-                <img
-                  class="trail__lantern"
-                  src="/assets/images/lantern-small.webp"
-                  alt=""
-                  width="52"
-                  height="150"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span class="trail__time">1:00 PM</span>
-                <span class="trail__title">Refreshments</span>
-              </li>
-              <li class="trail__item" style="--i: 2">
-                <img
-                  class="trail__lantern"
-                  src="/assets/images/lantern-small.webp"
-                  alt=""
-                  width="52"
-                  height="150"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span class="trail__time">2:30 PM</span>
-                <span class="trail__title">Session 2: Git &amp; GitHub</span>
-              </li>
-            </ol>
+            <div class="trail-wrap">
+              <img
+                class="trail__rope"
+                src="/assets/images/rope.webp"
+                alt=""
+                width="85"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+              />
+              <ol class="trail">
+                <li class="trail__item" style="--i: 0">
+                  <img
+                    class="trail__lantern"
+                    src="/assets/images/lantern-small.webp"
+                    alt=""
+                    width="52"
+                    height="150"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="trail__time">10:00 AM</span>
+                  <span class="trail__title">Session 1: Microservices</span>
+                </li>
+                <li class="trail__item" style="--i: 1">
+                  <img
+                    class="trail__lantern"
+                    src="/assets/images/lantern-small.webp"
+                    alt=""
+                    width="52"
+                    height="150"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="trail__time">1:00 PM</span>
+                  <span class="trail__title">Refreshments</span>
+                </li>
+                <li class="trail__item" style="--i: 2">
+                  <img
+                    class="trail__lantern"
+                    src="/assets/images/lantern-small.webp"
+                    alt=""
+                    width="52"
+                    height="150"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span class="trail__time">2:30 PM</span>
+                  <span class="trail__title">Session 2: Git &amp; GitHub</span>
+                </li>
+              </ol>
+            </div>
           </div>
 
           <aside class="schedule__aside">
@@ -491,10 +506,7 @@
               loading="lazy"
               decoding="async"
             />
-            <p class="note">
-              Bring a charged laptop for the afternoon. You will install Git and run every command
-              along with the session.
-            </p>
+            <p class="note">Bring a laptop if you have one. PCs will be available at the venue.</p>
           </aside>
         </div>
       </section>
@@ -518,13 +530,18 @@
 
           <div class="about__copy">
             <p class="stop__label">
-              <svg class="anim-flicker" aria-hidden="true"><use href="#icon-lantern" /></svg>Stop 3
-              of 5: about us
+              <img
+                class="stop__lantern"
+                src="/assets/images/lantern-icon.webp"
+                alt=""
+                width="73"
+                height="120"
+              />Stop 3: about us
             </p>
-            <h2 class="stop__title">Who haunts this place</h2>
+            <h2 class="stop__title">Meet the team</h2>
             <p class="stop__text">
               Walchand Linux Users' Group (WLUG) is the open source club of Walchand College of
-              Engineering, Sangli. We are students who use, build and champion Linux and open source
+              Engineering, Sangli. We are students who use, build and promote Linux and open source
               software, and we have been spreading it around campus since 2003.
             </p>
             <p class="stop__text">
@@ -539,9 +556,6 @@
               <li class="stat stat--violet">
                 <b>3 amazing events</b><span>Linux Diary, Open Source Day and Metamorphosis</span>
               </li>
-              <li class="stat stat--gold">
-                <b>FOSS United</b><span>supported Linux Diary 7.0</span>
-              </li>
             </ul>
           </div>
         </div>
@@ -553,8 +567,13 @@
         <div class="container faq">
           <div class="faq__intro">
             <p class="stop__label">
-              <svg class="anim-flicker" aria-hidden="true"><use href="#icon-lantern" /></svg>Stop 4
-              of 5: questions
+              <img
+                class="stop__lantern"
+                src="/assets/images/lantern-icon.webp"
+                alt=""
+                width="73"
+                height="120"
+              />Stop 4: questions
             </p>
             <h2 class="stop__title">Ask the crystal ball</h2>
             <img
@@ -587,7 +606,7 @@
             <details class="faq__item" name="faq">
               <summary>What should I bring?</summary>
               <p>
-                A charged laptop and your charger, so you can follow along during the Git session.
+                A laptop and charger if you have one. If not, PCs will be available at the venue.
               </p>
             </details>
             <details class="faq__item" name="faq">
@@ -606,17 +625,22 @@
         <div class="mist" aria-hidden="true"></div>
         <div class="container">
           <p class="stop__label">
-            <svg class="anim-flicker" aria-hidden="true"><use href="#icon-lantern" /></svg>Stop 5 of
-            5: events we conduct
+            <img
+              class="stop__lantern"
+              src="/assets/images/lantern-icon.webp"
+              alt=""
+              width="73"
+              height="120"
+            />Stop 5: events we conduct
           </p>
-          <h2 class="stop__title">Our other haunts</h2>
+          <h2 class="stop__title">The haunts we host</h2>
           <p class="stop__text">
             Open Source Day is one of three events WLUG runs, alongside Linux Diary and our flagship
             event, Metamorphosis.
           </p>
 
           <div class="events">
-            <article class="event-card event-card--gold">
+            <article data-event-card class="event-card event-card--gold">
               <div class="event-card__well">
                 <img
                   src="/assets/images/penguin-reader.webp"
@@ -628,15 +652,28 @@
                 />
               </div>
               <span class="tag">National level</span>
-              <h3 class="event-card__title">Linux Diary</h3>
-              <p>
-                Our national-level Linux event. Two days of sessions that run from Linux
-                fundamentals to networking, wrapped up with Wargames, a hands-on Linux challenge.
-                The seventh edition ran on 8 and 9 August 2026.
-              </p>
+              <h3 class="event-card__title">
+                <button
+                  type="button"
+                  class="event-card__toggle"
+                  aria-expanded="false"
+                  aria-controls="event-linux-diary"
+                >
+                  Linux Diary
+                </button>
+              </h3>
+              <span class="event-card__hint" aria-hidden="true"></span>
+              <div class="event-card__body" id="event-linux-diary">
+                <div class="event-card__inner">
+                  <p>
+                    Our national-level Linux event: two days from Linux basics to networking, ending
+                    with Wargames, a hands-on challenge.
+                  </p>
+                </div>
+              </div>
             </article>
 
-            <article class="event-card event-card--orange">
+            <article data-event-card class="event-card event-card--orange">
               <div class="event-card__well">
                 <img
                   src="/assets/images/cat-on-pumpkin.webp"
@@ -648,31 +685,99 @@
                 />
               </div>
               <span class="tag">You are here</span>
-              <h3 class="event-card__title">Open Source Day</h3>
-              <p>
-                A one-day event introducing open source technologies, how real-world systems are
-                built, and the tools developers use every day.
-              </p>
+              <h3 class="event-card__title">
+                <button
+                  type="button"
+                  class="event-card__toggle"
+                  aria-expanded="false"
+                  aria-controls="event-osd"
+                >
+                  Open Source Day
+                </button>
+              </h3>
+              <span class="event-card__hint" aria-hidden="true"></span>
+              <div class="event-card__body" id="event-osd">
+                <div class="event-card__inner">
+                  <p>
+                    A one-day event introducing open source technologies, how real-world systems are
+                    built, and the tools developers use every day.
+                  </p>
+                </div>
+              </div>
             </article>
 
-            <article class="event-card event-card--violet">
-              <div class="event-card__well event-card__well--warm">
+            <article data-event-card class="event-card event-card--violet">
+              <div class="event-card__well event-card__well--sea">
                 <img
-                  src="/assets/images/cocoon.webp"
+                  src="/assets/images/whale-helm.webp"
                   alt=""
-                  width="403"
-                  height="480"
+                  width="755"
+                  height="440"
                   loading="lazy"
                   decoding="async"
                 />
               </div>
               <span class="tag">Our flagship event</span>
-              <h3 class="event-card__title">Metamorphosis</h3>
-              <p>
-                WLUG’s original mega-event, built to turn curious students into confident coders.
-                Past editions got students hands-on with Python and shell scripting.
-              </p>
+              <h3 class="event-card__title">
+                <button
+                  type="button"
+                  class="event-card__toggle"
+                  aria-expanded="false"
+                  aria-controls="event-metamorphosis"
+                >
+                  Metamorphosis
+                </button>
+              </h3>
+              <span class="event-card__hint" aria-hidden="true"></span>
+              <div class="event-card__body" id="event-metamorphosis">
+                <div class="event-card__inner">
+                  <p>
+                    Our flagship DevOps event. Docker is at its core, alongside tools that change
+                    each year, such as Kubernetes and Go.
+                  </p>
+                </div>
+              </div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SPONSOR BAND ============ -->
+      <section class="sponsor-band" aria-label="Our sponsor: Euclideum">
+        <div class="sponsor-band__drift">
+          <div class="sponsor-band__track">
+            <div class="sponsor-band__group">
+              <span class="sponsor-band__item"
+                >Open Source Day 2026 is proudly sponsored by
+                <img src="/assets/images/euclideum-mark.svg" alt="" width="311" height="504" /><b
+                  >Euclideum</b
+                ></span
+              >
+              <span class="sponsor-band__sep" aria-hidden="true">✦</span>
+              <span class="sponsor-band__item"
+                >With sincere thanks to our sponsor
+                <img src="/assets/images/euclideum-mark.svg" alt="" width="311" height="504" /><b
+                  >Euclideum</b
+                ></span
+              >
+              <span class="sponsor-band__sep" aria-hidden="true">✦</span>
+            </div>
+            <div class="sponsor-band__group" aria-hidden="true">
+              <span class="sponsor-band__item"
+                >Open Source Day 2026 is proudly sponsored by
+                <img src="/assets/images/euclideum-mark.svg" alt="" width="311" height="504" /><b
+                  >Euclideum</b
+                ></span
+              >
+              <span class="sponsor-band__sep">✦</span>
+              <span class="sponsor-band__item"
+                >With sincere thanks to our sponsor
+                <img src="/assets/images/euclideum-mark.svg" alt="" width="311" height="504" /><b
+                  >Euclideum</b
+                ></span
+              >
+              <span class="sponsor-band__sep">✦</span>
+            </div>
           </div>
         </div>
       </section>
@@ -719,19 +824,78 @@
       </section>
     </main>
 
-    <footer class="footer container">
-      <div>
-        <p class="footer__club">Walchand Linux Users' Group</p>
-        <p class="footer__motto">Community | Knowledge | Share</p>
+    <footer class="footer">
+      <div class="footer__main container">
+        <div class="footer__brand">
+          <img
+            class="footer__logo"
+            src="/assets/images/wlug-logo.webp"
+            alt="WLUG"
+            width="188"
+            height="96"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <p class="footer__club">Walchand Linux Users' Group</p>
+            <p class="footer__motto">Community | Knowledge | Share</p>
+          </div>
+        </div>
+
+        <a class="footer__sponsor" href="https://euclideum.com/" target="_blank" rel="noopener">
+          <span class="footer__sponsor-label">Sponsored by</span>
+          <span class="footer__sponsor-name">
+            <img src="/assets/images/euclideum-mark.svg" alt="" width="311" height="504" />Euclideum
+          </span>
+        </a>
+
+        <nav class="footer__social" aria-label="WLUG on social media">
+          <a class="social" href="#" data-social="instagram" aria-label="WLUG on Instagram">
+            <img
+              src="/assets/images/social-instagram.webp"
+              alt=""
+              width="112"
+              height="112"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <a class="social" href="#" data-social="discord" aria-label="WLUG on Discord">
+            <img
+              src="/assets/images/social-discord.webp"
+              alt=""
+              width="112"
+              height="112"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <a class="social" href="#" data-social="github" aria-label="WLUG on GitHub">
+            <img
+              src="/assets/images/social-github.webp"
+              alt=""
+              width="112"
+              height="112"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <a class="social" href="#" data-social="linkedin" aria-label="WLUG on LinkedIn">
+            <img
+              src="/assets/images/social-linkedin.webp"
+              alt=""
+              width="112"
+              height="112"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+        </nav>
       </div>
-      <div class="footer__links">
-        <a class="tomb" href="#" data-social="instagram" aria-label="WLUG on Instagram"
-          >Instagram</a
-        >
-        <a class="tomb" href="#" data-social="discord" aria-label="WLUG on Discord">Discord</a>
-        <a class="tomb" href="#" data-social="github" aria-label="WLUG on GitHub">GitHub</a>
-        <a class="tomb" href="#" data-social="linkedin" aria-label="WLUG on LinkedIn">LinkedIn</a>
-        <a class="footer__top" href="#top">Back to the gate</a>
+
+      <div class="footer__bottom container">
+        <p>© 2026 Walchand Linux Users' Group, WCE Sangli</p>
+        <a class="footer__top" href="#top">Back to the gate ↑</a>
       </div>
     </footer>
   </body>

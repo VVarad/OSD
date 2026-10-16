@@ -59,6 +59,12 @@
     0 18px 28px rgb(5 0 15 / 0.6),
     0 0 70px rgb(255 140 50 / 0.35);
 }
+.hero__sponsor {
+  margin-top: 18px;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--c-text-faint);
+}
 .tilt-title {
   transform: perspective(1200px) rotateY(calc(var(--mx) * 7deg)) rotateX(calc(var(--my) * -5deg));
   transition: transform 0.4s ease-out;
@@ -130,13 +136,14 @@
   font-size: 1.75rem;
   color: var(--c-candle);
 }
+/* Always one row of four: cells and digits shrink on narrow screens instead of wrapping. */
 .countdown__grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 72px));
+  gap: clamp(6px, 2.4vw, 10px);
 }
 .countdown__cell {
-  width: 72px;
+  min-width: 0;
   padding: 14px 0 10px;
   border-radius: 18px;
   border: 1px solid rgb(201 188 230 / 0.18);
@@ -149,13 +156,13 @@
 .countdown__cell span {
   display: block;
   font-family: var(--font-display);
-  font-size: 2.25rem;
+  font-size: clamp(1.5rem, 8vw, 2.25rem);
   line-height: 1.1;
   color: var(--c-candle);
   font-variant-numeric: tabular-nums;
 }
 .countdown__cell small {
-  font-size: 0.875rem;
+  font-size: clamp(0.6875rem, 3.2vw, 0.875rem);
   color: var(--c-text-faint);
 }
 .countdown[data-live] .countdown__label,
@@ -314,6 +321,11 @@
 }
 
 @media (max-width: 700px) {
+  .hero__eyebrow,
+  .hero__title,
+  .hero__sponsor {
+    text-align: center;
+  }
   .countdown__label {
     text-align: center;
   }

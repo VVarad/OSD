@@ -1,6 +1,7 @@
 .events {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   gap: 32px;
   margin-top: 56px;
 }
@@ -46,18 +47,22 @@
   background:
     radial-gradient(ellipse at 50% 85%, rgb(var(--accent) / 0.32), transparent 65%), #1b0f30;
 }
-.event-card__well--warm {
+/* Cool sea glow behind the whale */
+.event-card__well--sea {
   background:
-    radial-gradient(ellipse at 50% 55%, rgb(255 226 150 / 0.42), transparent 70%),
-    radial-gradient(ellipse at 50% 90%, rgb(255 200 110 / 0.25), transparent 60%), #2a1b33;
+    radial-gradient(ellipse at 50% 55%, rgb(120 200 255 / 0.32), transparent 70%),
+    radial-gradient(ellipse at 50% 92%, rgb(80 220 190 / 0.21), transparent 60%), #17213f;
 }
 .event-card__well img {
   width: auto;
   height: 186px;
   filter: drop-shadow(0 14px 16px rgb(0 0 0 / 0.5));
 }
-.event-card__well--warm img {
-  height: 196px;
+.event-card__well--sea img {
+  width: min(100%, 300px);
+  height: auto;
+  max-height: 186px;
+  object-fit: contain;
 }
 
 .event-card .tag {
@@ -79,9 +84,175 @@
 .event-card--violet .event-card__title {
   color: var(--c-violet-soft);
 }
-.event-card > p {
-  margin-top: 10px;
+
+/* ---------- Haunted frames: closed cards show the title; tapping rattles the frame and opens it ---------- */
+.event-card {
+  position: relative;
+  transform-origin: 50% 0; /* frames swing from their nail */
+  transition:
+    rotate 0.5s var(--ease-out),
+    translate 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+.event-card:hover {
+  translate: 0 -4px;
+  border-color: rgb(var(--accent) / 0.45);
+  box-shadow: 0 18px 40px rgb(5 0 15 / 0.45);
+}
+.event-card.is-open {
+  rotate: 0deg; /* the frame settles straight once opened */
+  border-color: rgb(var(--accent) / 0.55);
+}
+.event-card:has(.event-card__toggle:focus-visible) {
+  outline: 3px solid var(--c-candle);
+  outline-offset: 4px;
+}
+
+.event-card__toggle {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.event-card__toggle:focus-visible {
+  outline: none;
+}
+/* the whole card is the click target */
+.event-card__toggle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.event-card__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--c-text-faint);
+}
+.event-card__hint::before {
+  content: 'Tap to reveal';
+}
+.event-card__hint::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  rotate: 45deg;
+  translate: 0 -2px;
+  transition:
+    rotate 0.35s ease,
+    translate 0.35s ease;
+}
+.event-card.is-open .event-card__hint::before {
+  content: 'Tap to close';
+}
+.event-card.is-open .event-card__hint::after {
+  rotate: 225deg;
+  translate: 0 2px;
+}
+
+/* Smooth open/close without measuring heights */
+.event-card__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease-out) 0.12s;
+}
+.event-card.is-open .event-card__body {
+  grid-template-rows: 1fr;
+}
+.event-card__inner {
+  min-height: 0;
+  overflow: hidden;
+}
+.event-card__inner p {
+  padding-top: 12px;
   font-size: 1.0625rem;
   line-height: 1.55;
   color: var(--c-text-muted);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.event-card.is-open .event-card__inner p {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+/* The rattle: a sharp jolt that dies down, like a picture frame knocked by something unseen */
+.event-card.is-rattling {
+  animation: frame-rattle 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+.event-card.is-rattling .event-card__well {
+  animation: frame-flicker 0.8s steps(1) both;
+}
+@keyframes frame-rattle {
+  0% {
+    transform: rotate(0deg);
+  }
+  8% {
+    transform: rotate(-5deg) translateY(2px);
+  }
+  20% {
+    transform: rotate(4.2deg);
+  }
+  32% {
+    transform: rotate(-3.2deg) translateY(1px);
+  }
+  44% {
+    transform: rotate(2.2deg);
+  }
+  56% {
+    transform: rotate(-1.4deg);
+  }
+  68% {
+    transform: rotate(0.8deg);
+  }
+  80% {
+    transform: rotate(-0.4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+@keyframes frame-flicker {
+  0%,
+  100% {
+    filter: none;
+  }
+  10% {
+    filter: brightness(1.55) saturate(1.2);
+  }
+  16% {
+    filter: brightness(0.7);
+  }
+  22% {
+    filter: none;
+  }
+  38% {
+    filter: brightness(1.25);
+  }
+  44% {
+    filter: none;
+  }
+}
+
+/* Opened cards line up: reserve four lines of text on wide screens */
+@media (min-width: 1000px) {
+  .event-card__inner p {
+    min-height: calc(1.55em * 4 + 12px);
+  }
+}
+@media (max-width: 999px) {
+  .event-card__inner p {
+    min-height: calc(1.55em * 5 + 12px);
+  }
 }

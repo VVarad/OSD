@@ -3,7 +3,7 @@
  * Handles validation, accessibility, Supabase database submission, and confirmation states.
  */
 
-import { isSupabaseConfigured, insertRegistrationToSupabase } from './supabase.js';
+import { isSupabaseConfigured, insertRegistrationToSupabase, normalizeMobileNumber } from './supabase.js';
 
 // Available departments at Walchand College of Engineering, Sangli
 export const WCE_DEPARTMENTS = [
@@ -24,7 +24,7 @@ const EMAIL_REGEX =
 
 /**
  * Validates a single field value.
- * @param {string} fieldName - name, email, year, department, prn
+ * @param {string} fieldName - name, email, mobile_number, year, department, college_name
  * @param {string} value
  * @returns {string|null} - error message or null if valid
  */
@@ -50,6 +50,19 @@ export function validateField(fieldName, value) {
       }
       return null;
 
+    case 'mobile_number':
+    case 'mobile': {
+      if (!trimmed) {
+        return 'Please enter your mobile number.';
+      }
+      const cleaned = trimmed.replace(/[\s\-()]/g, '');
+      const indianMobileRegex = /^(?:\+91|91|0)?[6-9]\d{9}$/;
+      if (!indianMobileRegex.test(cleaned)) {
+        return 'Please enter a valid 10-digit Indian mobile number.';
+      }
+      return null;
+    }
+
     case 'year':
       if (!trimmed) {
         return 'Please select your current year.';
@@ -68,14 +81,13 @@ export function validateField(fieldName, value) {
       }
       return null;
 
-    case 'prn':
+    case 'college_name':
+    case 'college':
       if (!trimmed) {
-        return 'Please enter your PRN.';
+        return 'Please enter your college name.';
       }
-      // College PRN format is not defined in the project; do not invent an artificial pattern.
-      // Require non-empty trimmed string of reasonable length.
       if (trimmed.length < 2) {
-        return 'PRN must be at least 2 characters.';
+        return 'College name must be at least 2 characters.';
       }
       return null;
 
@@ -88,7 +100,7 @@ export function validateField(fieldName, value) {
  * Modular submission handler.
  * Connects directly to Supabase if configured in .env,
  * otherwise falls back to custom API or local mock confirmation.
- * @param {Object} data - { name, email, year, department, prn }
+ * @param {Object} data - { name, email, mobile_number, year, department, college_name }
  * @returns {Promise<Object>} confirmation object
  */
 export async function submitRegistration(data) {
@@ -130,6 +142,9 @@ export async function submitRegistration(data) {
   const randomSuffix = Math.floor(1000 + Math.random() * 9000);
   const passId = `OSD26-${randomSuffix}`;
 
+  const rawMobile = data.mobile_number ?? data.mobile ?? '';
+  const rawCollege = data.college_name ?? data.college ?? '';
+
   return {
     success: true,
     passId,
@@ -137,9 +152,10 @@ export async function submitRegistration(data) {
     participant: {
       name: data.name.trim(),
       email: data.email.trim(),
+      mobile_number: normalizeMobileNumber(rawMobile),
       year: data.year.trim(),
       department: data.department.trim(),
-      prn: data.prn.trim(),
+      college_name: rawCollege.trim(),
     },
   };
 }
@@ -157,7 +173,7 @@ export function initRegistration() {
 
   if (!form) return;
 
-  const fields = ['name', 'email', 'year', 'department', 'prn'];
+  const fields = ['name', 'email', 'mobile_number', 'year', 'department', 'college_name'];
   const touched = {};
 
   function hideGeneralError() {
@@ -264,13 +280,17 @@ export function initRegistration() {
       return;
     }
 
+    const rawMobile = document.getElementById('mobile_number')?.value || '';
+    const rawCollege = document.getElementById('college_name')?.value || '';
+
     // Collect data
     const formData = {
-      name: document.getElementById('name').value,
-      email: document.getElementById('email').value,
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      mobile_number: normalizeMobileNumber(rawMobile),
       year: document.getElementById('year').value,
       department: document.getElementById('department').value,
-      prn: document.getElementById('prn').value,
+      college_name: rawCollege.trim(),
     };
 
     // Set Loading State (prevent double submission)
@@ -298,16 +318,18 @@ export function initRegistration() {
         // Populate ticket details
         const nameEl = document.getElementById('ticket-name');
         const emailEl = document.getElementById('ticket-email');
+        const mobileEl = document.getElementById('ticket-mobile');
         const yearDeptEl = document.getElementById('ticket-year-dept');
-        const prnEl = document.getElementById('ticket-prn');
+        const collegeEl = document.getElementById('ticket-college');
         const passIdEl = document.getElementById('ticket-pass-id');
 
         const participant = result.participant || formData;
 
         if (nameEl) nameEl.textContent = participant.name;
         if (emailEl) emailEl.textContent = participant.email;
+        if (mobileEl) mobileEl.textContent = participant.mobile_number;
         if (yearDeptEl) yearDeptEl.textContent = `${participant.year} • ${participant.department}`;
-        if (prnEl) prnEl.textContent = participant.prn;
+        if (collegeEl) collegeEl.textContent = participant.college_name;
         if (passIdEl) passIdEl.textContent = result.passId || 'OSD26-CONFIRMED';
 
         successCard.focus();
@@ -359,8 +381,10 @@ export function initRegistration() {
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initRegistration, { once: true });
-} else {
-  initRegistration();
+if (typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRegistration, { once: true });
+  } else {
+    initRegistration();
+  }
 }

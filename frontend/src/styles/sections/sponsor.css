@@ -1,0 +1,83 @@
+/* Slow-moving sponsor band between the FAQ and the events */
+.sponsor-band {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  border-block: 1px solid rgb(255 209 92 / 0.22);
+  background: linear-gradient(90deg, #1a0f2f, #24143f 50%, #1a0f2f);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.sponsor-band__track {
+  display: flex;
+  width: max-content;
+  animation: sponsor-scroll 70s linear infinite;
+}
+.sponsor-band:hover .sponsor-band__track {
+  animation-play-state: paused;
+}
+.sponsor-band__group {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-right: 40px;
+  white-space: nowrap;
+}
+.sponsor-band__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--c-text-soft);
+}
+.sponsor-band__item img {
+  width: auto;
+  height: 22px;
+}
+.sponsor-band__item b {
+  font-weight: 700;
+  color: #38ecb0;
+}
+.sponsor-band__sep {
+  font-size: 0.75rem;
+  color: var(--c-candle);
+  opacity: 0.7;
+}
+
+@keyframes sponsor-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Where supported, scrolling the page nudges the band a little further */
+@supports (animation-timeline: view()) {
+  .sponsor-band__drift {
+    animation: sponsor-drift linear both;
+    animation-timeline: view();
+  }
+  @keyframes sponsor-drift {
+    from {
+      transform: translateX(6%);
+    }
+    to {
+      transform: translateX(-6%);
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .sponsor-band {
+    height: 46px;
+  }
+  .sponsor-band__item {
+    font-size: 0.9375rem;
+  }
+  .sponsor-band__item img {
+    height: 19px;
+  }
+}

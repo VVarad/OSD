@@ -6,6 +6,7 @@ import { EVENT } from '../config/event.js';
 import { initCountdown } from './countdown.js';
 import { initFaq } from './faq.js';
 import { initSessions } from './sessions.js';
+import { initEventCards } from './event-cards.js';
 import { initHeroParallax } from './hero-parallax.js';
 import { initOffscreenPause } from './motion.js';
 import { initFog } from './fog/fog.js';
@@ -30,6 +31,7 @@ function init() {
   initCountdown(document.querySelector('[data-countdown]'), EVENT.startsAt);
   initFaq(document.querySelector('[data-faq]'));
   initSessions(document.querySelector('[data-sessions]'));
+  initEventCards();
   initOffscreenPause(document.querySelectorAll('main > section'));
 
   const hero = document.querySelector('[data-hero]');

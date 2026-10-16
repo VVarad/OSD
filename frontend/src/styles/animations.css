@@ -123,7 +123,8 @@
 .is-offscreen .anim-flicker,
 .is-offscreen .mist,
 .is-offscreen .fireflies span,
-.is-offscreen .trail::before,
+.is-offscreen .stop__lantern,
+.is-offscreen .sponsor-band__track,
 .is-offscreen .trail__lantern,
 .is-offscreen .hanging-lantern,
 .is-offscreen .haunt__shadow {

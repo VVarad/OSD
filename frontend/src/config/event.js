@@ -11,9 +11,9 @@ export const EVENT = {
 
   /** Footer links. Empty string = link stays hidden-safe ("#"). */
   socials: {
-    instagram: '',
-    discord: '',
-    github: '',
-    linkedin: '',
+    instagram: 'https://www.instagram.com/wcewlug',
+    discord: 'https://discord.com/invite/2XESRHNPWt',
+    github: 'https://github.com/Walchand-Linux-Users-Group',
+    linkedin: 'https://www.linkedin.com/company/wlug-club/',
   },
 };
