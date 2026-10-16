@@ -277,143 +277,87 @@
                 <span class="sign__kicker">Session 2</span
                 ><b class="sign__title">Git &amp; GitHub</b>
               </button>
+
+              <div
+                id="session-1"
+                class="scroll scroll--one"
+                role="region"
+                aria-label="Microservices topics"
+                hidden
+              >
+                <div class="scroll__head">
+                  <h3 class="scroll__title">Microservices</h3>
+                  <div class="scroll__meta">
+                    <span>Session 1</span>
+                    <button
+                      type="button"
+                      class="scroll__close"
+                      data-session-close
+                      aria-label="Close"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+                <div class="scroll__grid">
+                  <div>
+                    <h4>Architecture &amp; APIs</h4>
+                    <p>Client-server model, RESTful API design, and monolith vs microservices.</p>
+                  </div>
+                  <div>
+                    <h4>Distributed Internals</h4>
+                    <p>Database-per-service, Redis caching, and Kafka / RabbitMQ message queues.</p>
+                  </div>
+                  <div>
+                    <h4>Deployment &amp; Live Project</h4>
+                    <p>Docker, Kubernetes orchestration, and an end-to-end project walkthrough.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                id="session-2"
+                class="scroll scroll--two"
+                role="region"
+                aria-label="Git and GitHub topics"
+                hidden
+              >
+                <div class="scroll__head">
+                  <h3 class="scroll__title">Git &amp; GitHub</h3>
+                  <div class="scroll__meta">
+                    <span>Session 2</span>
+                    <button
+                      type="button"
+                      class="scroll__close"
+                      data-session-close
+                      aria-label="Close"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+                <div class="scroll__grid">
+                  <div>
+                    <h4>Linux &amp; VCS Basics</h4>
+                    <p>
+                      Terminal navigation and version control fundamentals for project tracking.
+                    </p>
+                  </div>
+                  <div>
+                    <h4>Git Core Workflow</h4>
+                    <p>Working tree, staging area, commit history, and ignoring untracked files.</p>
+                  </div>
+                  <div>
+                    <h4>Branching &amp; Collaboration</h4>
+                    <p>
+                      Branch isolation, merging, conflict resolution, and remote teamwork on GitHub.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <p class="village__hint" data-session-hint>Tap a house to peek inside.</p>
-
-            <div
-              id="session-1"
-              class="scroll scroll--one"
-              role="region"
-              aria-label="Microservices topics"
-              hidden
-            >
-              <div class="scroll__head">
-                <h3 class="scroll__title">Microservices</h3>
-                <div class="scroll__meta">
-                  <span>Session 1</span>
-                  <button type="button" class="scroll__close" data-session-close aria-label="Close">
-                    ×
-                  </button>
-                </div>
-              </div>
-              <div class="scroll__grid">
-                <div>
-                  <h4>Open source, the basics</h4>
-                  <p>
-                    What open source is, how it is built in the open, why it is transparent and
-                    secure, and projects like Linux, Git, GitLab and Postgres.
-                  </p>
-                </div>
-                <div>
-                  <h4>Before we begin</h4>
-                  <p>
-                    How the internet and backends work through client-server architecture, HTTP
-                    methods and status codes, and what REST really means.
-                  </p>
-                </div>
-                <div>
-                  <h4>Microservices 101</h4>
-                  <p>
-                    Monoliths vs microservices, the three core ideas behind them, their trade-offs,
-                    and the API gateway and service discovery that hold them together.
-                  </p>
-                </div>
-                <div>
-                  <h4>Under the hood</h4>
-                  <p>
-                    REST and gRPC, a database per service, SQL vs NoSQL, Redis caching, load
-                    balancing and scaling, message brokers, RabbitMQ vs Kafka and event-driven
-                    design.
-                  </p>
-                </div>
-                <div>
-                  <h4>Shipping it</h4>
-                  <p>Why Docker and Kubernetes are essential for deploying microservices.</p>
-                </div>
-                <div>
-                  <h4>Live walkthrough</h4>
-                  <p>
-                    A real microservice project, like movie ticketing or e-commerce, explained end
-                    to end.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div
-              id="session-2"
-              class="scroll scroll--two"
-              role="region"
-              aria-label="Git and GitHub topics"
-              hidden
-            >
-              <div class="scroll__head">
-                <h3 class="scroll__title">Git &amp; GitHub</h3>
-                <div class="scroll__meta">
-                  <span>Session 2</span>
-                  <button type="button" class="scroll__close" data-session-close aria-label="Close">
-                    ×
-                  </button>
-                </div>
-              </div>
-              <div class="scroll__grid">
-                <div>
-                  <h4>Why version control</h4>
-                  <p>
-                    Backups, recovering from mistakes, a full project history, and managing many
-                    versions of your work.
-                  </p>
-                </div>
-                <div>
-                  <h4>Inside Git</h4>
-                  <p>
-                    Where Git came from, the working directory, staging area and local repository,
-                    and the edit, add, commit cycle.
-                  </p>
-                </div>
-                <div>
-                  <h4>Git vs GitHub &amp; GitLab</h4>
-                  <p>
-                    What lives on your machine, what lives in the cloud, and how teams collaborate
-                    online.
-                  </p>
-                </div>
-                <div>
-                  <h4>Linux essentials</h4>
-                  <p>
-                    <code>ls</code>, <code>pwd</code>, <code>cd</code>, <code>mkdir</code>,
-                    <code>cat</code>, <code>touch</code>, <code>rm</code>, the commands you need
-                    first.
-                  </p>
-                </div>
-                <div>
-                  <h4>Setting up</h4>
-                  <p>Installing Git on Linux and Windows and configuring your name and email.</p>
-                </div>
-                <div>
-                  <h4>Everyday Git</h4>
-                  <p>
-                    <code>git init</code>, <code>git status</code>, <code>git add</code>,
-                    <code>git commit</code>, <code>git log</code> and <code>.gitignore</code>.
-                  </p>
-                </div>
-                <div>
-                  <h4>Branching</h4>
-                  <p>
-                    Creating, renaming, switching and comparing branches, merging, and handling
-                    merge conflicts.
-                  </p>
-                </div>
-                <div>
-                  <h4>Power moves</h4>
-                  <p>
-                    <code>git stash</code>, <code>git reset</code>, <code>git rebase</code> and
-                    <code>git revert</code>.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
