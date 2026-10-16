@@ -129,7 +129,9 @@ export async function insertRegistrationToSupabase(data) {
     }
 
     if (response.status === 409 || errorDetail.toLowerCase().includes('duplicate')) {
-      throw new Error('This Mobile Number or Email ID is already registered for Open Source Day 2026.');
+      throw new Error(
+        'This Mobile Number or Email ID is already registered for Open Source Day 2026.',
+      );
     }
 
     if (response.status === 404) {

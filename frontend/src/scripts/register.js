@@ -3,7 +3,11 @@
  * Handles validation, accessibility, Supabase database submission, and confirmation states.
  */
 
-import { isSupabaseConfigured, insertRegistrationToSupabase, normalizeMobileNumber } from './supabase.js';
+import {
+  isSupabaseConfigured,
+  insertRegistrationToSupabase,
+  normalizeMobileNumber,
+} from './supabase.js';
 
 // Available departments at Walchand College of Engineering, Sangli
 export const WCE_DEPARTMENTS = [
