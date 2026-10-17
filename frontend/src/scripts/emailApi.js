@@ -59,8 +59,7 @@ export async function sendRegistrationConfirmationEmail(data) {
   }
 
   if (!response.ok) {
-    const errorMsg =
-      result?.message || `Email delivery failed with status ${response.status}.`;
+    const errorMsg = result?.message || `Email delivery failed with status ${response.status}.`;
     console.error('[Email API] Error response:', { status: response.status, message: errorMsg });
     throw new Error(errorMsg);
   }
