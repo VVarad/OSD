@@ -83,12 +83,20 @@ app.use((err, _req, res, _next) => {
   });
 });
 
+
+
+if (!process.env.VERCEL) {
+
 const server = app.listen(env.PORT, () => {
   console.log(`[Server] WLUG OSD 2K26 Email backend running on port ${env.PORT}`);
   console.log(`[Server] Allowed origins: ${allowedOrigins.join(', ')}`);
 
   // Verify SMTP connection
   verifyMailer();
-});
+})
+};
 
-export { app, server };
+export { app };
+export default app;
+
+//export { app, server };

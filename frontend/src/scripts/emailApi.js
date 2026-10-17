@@ -6,7 +6,7 @@
 const BACKEND_URL = (
   import.meta.env?.VITE_BACKEND_URL ||
   import.meta.env?.VITE_EMAIL_API_URL ||
-  'http://localhost:5000'
+  ''
 )
   .trim()
   .replace(/\/+$/, '');
