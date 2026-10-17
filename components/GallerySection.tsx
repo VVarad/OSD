@@ -15,21 +15,23 @@ interface GalleryPhoto {
   left: string;
   floatDuration: number;
   rotationDrift: number;
+  isCenterpiece?: boolean;
 }
 
 const GALLERY_ITEMS: GalleryPhoto[] = [
+  // Top Row (mirroring Sirius, Umbridge/McGonagall, Bellatrix)
   {
     id: "mem-1",
     imageSrc: "/gallery/event-1.jpg",
     title: "The Gathering",
     caption: "Attendees kicking off the day at WCE.",
-    frameSrc: "/frames/frame-gothic.png",
-    width: 270,
-    height: 340,
-    top: "10%",
-    left: "8%",
+    frameSrc: "/frames/frame-square.png",
+    width: 230,
+    height: 290,
+    top: "3%",
+    left: "7%",
     floatDuration: 6.2,
-    rotationDrift: 2.5,
+    rotationDrift: 1.8,
   },
   {
     id: "mem-2",
@@ -37,51 +39,108 @@ const GALLERY_ITEMS: GalleryPhoto[] = [
     title: "Microservices Workshop",
     caption: "Hands-on microservice architectures and deployments.",
     frameSrc: "/frames/frame-oval.png",
-    width: 290,
-    height: 360,
-    top: "8%",
+    width: 240,
+    height: 290,
+    top: "2%",
     left: "40%",
     floatDuration: 7.8,
-    rotationDrift: -2.0,
+    rotationDrift: -1.5,
   },
   {
     id: "mem-3",
     imageSrc: "/gallery/event-3.jpg",
     title: "Git & GitHub Labs",
     caption: "Demystifying commits, branching, and interactive rebasing.",
-    frameSrc: "/frames/frame-square.png",
-    width: 260,
-    height: 320,
-    top: "14%",
+    frameSrc: "/frames/frame-gothic.png",
+    width: 230,
+    height: 290,
+    top: "4%",
     left: "73%",
     floatDuration: 6.8,
-    rotationDrift: 2.8,
+    rotationDrift: 2.0,
   },
+
+  // Middle Tier (mirroring Lucius, Grand Centerpiece Dumbledore, Snape)
   {
     id: "mem-4",
     imageSrc: "/gallery/event-4.jpg",
     title: "Terminal Sorcery",
     caption: "Late afternoon problem solving and mentoring.",
-    frameSrc: "/frames/frame-oval.png",
-    width: 280,
-    height: 350,
-    top: "52%",
-    left: "22%",
+    frameSrc: "/frames/frame-square.png",
+    width: 240,
+    height: 300,
+    top: "34%",
+    left: "13%",
     floatDuration: 5.9,
-    rotationDrift: -1.7,
+    rotationDrift: -1.9,
   },
   {
     id: "mem-5",
     imageSrc: "/gallery/event-5.jpg",
+    title: "The Grand Assembly",
+    caption: "The keynote hall alive with open source passion and energy.",
+    frameSrc: "/frames/frame-gothic.png",
+    width: 295,
+    height: 380,
+    top: "26%",
+    left: "38%",
+    floatDuration: 8.4,
+    rotationDrift: 1.2,
+    isCenterpiece: true,
+  },
+  {
+    id: "mem-6",
+    imageSrc: "/gallery/event-6.jpg",
+    title: "Code & Collaboration",
+    caption: "Peer programming, architecture debates, and lightning hacks.",
+    frameSrc: "/frames/frame-square.png",
+    width: 240,
+    height: 300,
+    top: "33%",
+    left: "69%",
+    floatDuration: 6.6,
+    rotationDrift: 1.7,
+  },
+
+  // Bottom Row (mirroring Hagrid, Hedwig/Rita, Lockhart)
+  {
+    id: "mem-7",
+    imageSrc: "/gallery/event-7.jpg",
+    title: "The Mentorship Circle",
+    caption: "Senior engineers guiding newcomers through their first contributions.",
+    frameSrc: "/frames/frame-square.png",
+    width: 250,
+    height: 310,
+    top: "66%",
+    left: "9%",
+    floatDuration: 6.4,
+    rotationDrift: 2.1,
+  },
+  {
+    id: "mem-8",
+    imageSrc: "/gallery/event-8.jpg",
+    title: "Open Source Odyssey",
+    caption: "Exploring distributed systems and real-world Linux tools.",
+    frameSrc: "/frames/frame-oval.png",
+    width: 235,
+    height: 290,
+    top: "68%",
+    left: "40.5%",
+    floatDuration: 7.4,
+    rotationDrift: -1.6,
+  },
+  {
+    id: "mem-9",
+    imageSrc: "/gallery/event-9.jpg",
     title: "The Finale",
     caption: "Certificates, swags, and closing open source celebrations.",
     frameSrc: "/frames/frame-gothic.png",
-    width: 275,
-    height: 345,
-    top: "54%",
-    left: "62%",
-    floatDuration: 7.4,
-    rotationDrift: 2.1,
+    width: 240,
+    height: 300,
+    top: "65%",
+    left: "72%",
+    floatDuration: 6.9,
+    rotationDrift: -1.8,
   },
 ];
 
@@ -140,13 +199,13 @@ export default function GallerySection() {
   };
 
   return (
-    <section id="gallery" className="relative w-full min-h-[110vh] bg-[#0E081F] overflow-hidden select-none py-20 px-4">
+    <section id="gallery" className="relative w-full min-h-[130vh] bg-[#0E081F] overflow-hidden select-none py-20 px-4">
       {/* Background glow effects */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 left-1/3 w-[300px] h-[300px] bg-amber-600/10 rounded-full blur-[90px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-purple-900/20 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 left-1/3 w-[450px] h-[450px] bg-amber-600/10 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Section Header */}
-      <div className="relative z-10 text-center mb-12">
+      <div className="relative z-10 text-center mb-10">
         <h2 className="text-4xl md:text-5xl font-black text-amber-200 tracking-wide font-serif drop-shadow-md">
           The Hall of Memories
         </h2>
@@ -155,18 +214,18 @@ export default function GallerySection() {
         </p>
       </div>
 
-      {/* Floating Canvas */}
-      <div ref={containerRef} className="relative w-full h-[80vh]">
+      {/* Salon Wall Floating Canvas */}
+      <div ref={containerRef} className="relative w-full max-w-[1240px] mx-auto h-[1050px]">
         {GALLERY_ITEMS.map((item, index) => (
           <motion.div
             key={item.id}
             drag
             dragConstraints={containerRef}
             dragElastic={0.2}
-            whileHover={{ scale: 1.05, zIndex: 40 }}
+            whileHover={{ scale: 1.05, zIndex: 50 }}
             whileTap={{ scale: 0.98 }}
             animate={{
-              y: [0, -18, 14, 0],
+              y: [0, -16, 14, 0],
               rotate: [0, item.rotationDrift, -item.rotationDrift, 0],
             }}
             transition={{
@@ -191,11 +250,12 @@ export default function GallerySection() {
               left: item.left,
               width: item.width,
               height: item.height,
+              zIndex: item.isCenterpiece ? 15 : 10,
             }}
-            className="cursor-pointer flex items-center justify-center filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)]"
+            className="cursor-pointer flex items-center justify-center filter drop-shadow-[0_15px_30px_rgba(0,0,0,0.65)] hover:drop-shadow-[0_20px_40px_rgba(255,122,0,0.3)] transition-all"
           >
             {/* Inner Photo */}
-            <div className="absolute w-[62%] h-[66%] rounded-sm overflow-hidden z-10">
+            <div className="absolute w-[62%] h-[66%] rounded-sm overflow-hidden z-10 bg-black/60">
               <img
                 src={item.imageSrc}
                 alt={item.title}
