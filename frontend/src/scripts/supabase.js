@@ -3,15 +3,15 @@
  * Uses native fetch to connect to Supabase PostgREST API without heavy external dependencies.
  */
 
-const SUPABASE_URL = (import.meta.env.VITE_SUPABASE_URL || '').trim().replace(/\/+$/, '');
-const SUPABASE_ANON_KEY = (import.meta.env.VITE_SUPABASE_ANON_KEY || '').trim();
-const SUPABASE_TABLE = (import.meta.env.VITE_SUPABASE_TABLE || 'registrations').trim();
+const SUPABASE_URL = (import.meta.env?.VITE_SUPABASE_URL || '').trim().replace(/\/+$/, '');
+const SUPABASE_ANON_KEY = (import.meta.env?.VITE_SUPABASE_ANON_KEY || '').trim();
+const SUPABASE_TABLE = (import.meta.env?.VITE_SUPABASE_TABLE || 'registrations').trim();
 
 // --- Diagnostic: confirm env is loaded by Vite (safe: never logs key values) ---
-console.log('[Supabase] VITE_SUPABASE_URL present:', Boolean(import.meta.env.VITE_SUPABASE_URL));
+console.log('[Supabase] VITE_SUPABASE_URL present:', Boolean(import.meta.env?.VITE_SUPABASE_URL));
 console.log(
   '[Supabase] VITE_SUPABASE_ANON_KEY present:',
-  Boolean(import.meta.env.VITE_SUPABASE_ANON_KEY),
+  Boolean(import.meta.env?.VITE_SUPABASE_ANON_KEY),
 );
 console.log('[Supabase] Table:', SUPABASE_TABLE);
 
@@ -38,8 +38,21 @@ export function isSupabaseConfigured() {
 }
 
 /**
+ * Normalizes Indian mobile number to 10 digits consistently.
+ * Accepts 10-digit number with optional +91, 91, or 0 prefix.
+ * @param {string} value
+ * @returns {string}
+ */
+export function normalizeMobileNumber(value) {
+  if (typeof value !== 'string') return '';
+  const cleaned = value.trim().replace(/[\s\-()]/g, '');
+  const match = cleaned.match(/^(?:\+91|91|0)?([6-9]\d{9})$/);
+  return match ? match[1] : cleaned;
+}
+
+/**
  * Inserts a new registration record into Supabase.
- * @param {Object} data - { name, email, year, department, prn }
+ * @param {Object} data - { name, email, mobile_number, year, department, college_name }
  * @returns {Promise<Object>}
  */
 export async function insertRegistrationToSupabase(data) {
@@ -55,12 +68,16 @@ export async function insertRegistrationToSupabase(data) {
   const randomSuffix = Math.floor(1000 + Math.random() * 9000);
   const passId = `OSD26-${randomSuffix}`;
 
+  const rawMobile = data.mobile_number ?? data.mobile ?? '';
+  const rawCollege = data.college_name ?? data.college ?? '';
+
   const payload = {
     name: data.name.trim(),
     email: data.email.trim(),
+    mobile_number: normalizeMobileNumber(rawMobile),
     year: data.year.trim(),
     department: data.department.trim(),
-    prn: data.prn.trim(),
+    college_name: rawCollege.trim(),
     pass_id: passId,
   };
 
@@ -112,7 +129,9 @@ export async function insertRegistrationToSupabase(data) {
     }
 
     if (response.status === 409 || errorDetail.toLowerCase().includes('duplicate')) {
-      throw new Error('This PRN or Email ID is already registered for Open Source Day 2026.');
+      throw new Error(
+        'This Mobile Number or Email ID is already registered for Open Source Day 2026.',
+      );
     }
 
     if (response.status === 404) {
@@ -136,9 +155,10 @@ export async function insertRegistrationToSupabase(data) {
     participant: {
       name: payload.name,
       email: payload.email,
+      mobile_number: payload.mobile_number,
       year: payload.year,
       department: payload.department,
-      prn: payload.prn,
+      college_name: payload.college_name,
     },
   };
 }

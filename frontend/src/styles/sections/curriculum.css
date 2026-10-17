@@ -239,6 +239,11 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--c-text-faint);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.scroll__meta span {
+  white-space: nowrap;
 }
 .scroll__close {
   display: inline-grid;

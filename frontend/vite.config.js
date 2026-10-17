@@ -8,17 +8,21 @@ function multiPageRewritePlugin() {
   return {
     name: 'multi-page-rewrite',
     configureServer(server) {
-      server.middlewares.use((req, _res, next) => {
+      server.middlewares.use((req, res, next) => {
         if (req.url === '/register' || req.url === '/register/') {
-          req.url = '/register.html';
+          res.writeHead(302, { Location: '/#registration' });
+          res.end();
+          return;
         }
         next();
       });
     },
     configurePreviewServer(server) {
-      server.middlewares.use((req, _res, next) => {
+      server.middlewares.use((req, res, next) => {
         if (req.url === '/register' || req.url === '/register/') {
-          req.url = '/register.html';
+          res.writeHead(302, { Location: '/#registration' });
+          res.end();
+          return;
         }
         next();
       });
@@ -27,6 +31,7 @@ function multiPageRewritePlugin() {
 }
 
 export default defineConfig({
+  envDir: resolve(__dirname, '..'),
   plugins: [multiPageRewritePlugin()],
   server: { port: 5173, open: true },
   build: {

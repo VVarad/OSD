@@ -6,8 +6,8 @@ export const EVENT = {
   /** Countdown target, ISO 8601 with IST offset. Keep in sync with the date shown in index.html. */
   startsAt: '2026-10-25T09:00:00+05:30',
 
-  /** Where every "Register" button points. Replace with the form URL once it exists. */
-  registerUrl: '/register.html',
+  /** Where every "Register" button points. Points to the inline registration section on the home page. */
+  registerUrl: '#registration',
 
   /** Footer links. Empty string = link stays hidden-safe ("#"). */
   socials: {

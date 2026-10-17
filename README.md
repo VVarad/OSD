@@ -65,7 +65,7 @@ Smoothness is the top priority for this site.
 
 Native `<details>` for the FAQ, real `<button>`s with `aria-expanded` for the curriculum houses, a skip link, visible focus styles, and `prefers-reduced-motion` support. Keep it that way.
 
-## Deployment (Vercel)
+## Deployment (Vercel).
 
 Import the repository in Vercel and set **Root Directory** to `frontend`. Vercel detects Vite automatically (build: `npm run build`, output: `dist`).
 

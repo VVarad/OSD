@@ -1,10 +1,21 @@
 .register {
   position: relative;
   overflow: hidden;
-  padding: 110px var(--gutter) 48px;
+  padding: 110px var(--gutter) 80px;
   text-align: center;
   background: var(--c-night);
 }
+
+.register-anchor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+  visibility: hidden;
+}
+
 .register__spotlight {
   position: absolute;
   left: 50%;
@@ -17,6 +28,7 @@
   background: radial-gradient(ellipse, rgb(138 77 255 / 0.28), transparent 65%);
   pointer-events: none;
 }
+
 .register__inner {
   position: relative;
   z-index: 3;
@@ -27,46 +39,12 @@
   align-items: center;
 }
 
-/* Floating ghost over a still base */
-.haunt {
-  position: relative;
-  width: 240px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.haunt__ghost {
-  position: relative;
-  z-index: 2;
-  width: 180px;
-  filter: drop-shadow(0 0 30px rgb(201 168 255 / 0.35));
-}
-.haunt__base {
-  position: relative;
-  width: 230px;
-  margin-top: 18px;
-}
-.haunt__base img {
-  filter: drop-shadow(0 14px 16px rgb(0 0 0 / 0.45));
-}
-.haunt__shadow {
-  position: absolute;
-  left: 50%;
-  top: 30%;
-  width: 120px;
-  height: 18px;
-  margin-left: -60px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse, rgb(10 20 5 / 0.6), transparent 70%);
-  animation: shadow-breathe 5s ease-in-out infinite;
-}
-
 .register__title {
-  margin-top: 24px;
+  margin-top: 20px;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(2.75rem, 6vw, 5rem);
-  line-height: 1.02;
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
+  line-height: 1.05;
   color: var(--c-text-warm);
   text-shadow:
     0 1px 0 #9c6bf5,
@@ -77,13 +55,27 @@
     0 6px 0 #3b1b73,
     0 16px 26px rgb(5 0 15 / 0.55);
 }
+
 .register__text {
-  max-width: 40ch;
-  margin-top: 20px;
-  font-size: 1.25rem;
+  max-width: 48ch;
+  margin-top: 16px;
+  font-size: 1.1875rem;
   line-height: 1.55;
   color: var(--c-text-muted);
 }
-.register .btn {
-  margin-top: 34px;
+
+/* Inline registration form card adjustments inside the section */
+.register .register-card {
+  margin-top: 64px;
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  .register {
+    padding: 80px var(--gutter) 60px;
+  }
+
+  .register .register-card {
+    margin-top: 48px;
+  }
 }
