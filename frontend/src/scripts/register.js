@@ -175,10 +175,13 @@ export async function submitRegistration(data) {
   };
 }
 
+let isInitialized = false;
+
 /**
  * Initializes the registration form interface.
  */
 export function initRegistration() {
+  if (isInitialized) return;
   const form = document.getElementById('register-form');
   const successCard = document.getElementById('register-success');
   const submitBtn = document.getElementById('submit-btn');
@@ -188,6 +191,7 @@ export function initRegistration() {
   const emailStatusBanner = document.getElementById('email-status-banner');
 
   if (!form) return;
+  isInitialized = true;
 
   const fields = ['name', 'email', 'mobile_number', 'year', 'department', 'college_name'];
   const touched = {};

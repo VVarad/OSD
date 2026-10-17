@@ -64,8 +64,9 @@
           <li><a href="#about-us">About us</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#events">Events</a></li>
+          <li><a href="#registration">Registration</a></li>
         </ul>
-        <a class="btn btn--primary btn--sm" href="#register" data-register-link>Register</a>
+        <a class="btn btn--primary btn--sm" href="#registration" data-register-link>Register</a>
       </nav>
     </header>
 
@@ -105,7 +106,7 @@
             </ul>
 
             <div class="hero__actions">
-              <a class="btn btn--primary btn--lg" href="#register" data-register-link
+              <a class="btn btn--primary btn--lg" href="#registration" data-register-link
                 >Register now</a
               >
               <a class="btn btn--ghost btn--lg" href="#schedule">See the schedule</a>
@@ -726,8 +727,9 @@
         </div>
       </section>
 
-      <!-- ============ FINAL: register ============ -->
-      <section id="register" class="register">
+      <!-- ============ FINAL: registration ============ -->
+      <section id="registration" class="register">
+        <div id="register" class="register-anchor" aria-hidden="true"></div>
         <div class="register__spotlight" aria-hidden="true"></div>
         <div class="fireflies" aria-hidden="true">
           <span style="--x: 18%; --y: 22%; --d: 0.4s"></span>
@@ -737,33 +739,336 @@
         </div>
 
         <div class="register__inner">
-          <div class="haunt" aria-hidden="true">
+          <p class="stop__label">
             <img
-              class="haunt__ghost anim-float"
-              src="/assets/images/ghost.webp"
+              class="stop__lantern"
+              src="/assets/images/lantern-icon.webp"
               alt=""
-              width="345"
-              height="400"
-              loading="lazy"
-              decoding="async"
-            />
-            <div class="haunt__base">
-              <img
-                src="/assets/images/ghost-base.webp"
-                alt=""
-                width="480"
-                height="172"
-                loading="lazy"
-                decoding="async"
-              />
-              <span class="haunt__shadow"></span>
-            </div>
-          </div>
+              width="73"
+              height="120"
+            />Registration
+          </p>
           <h2 class="register__title">The door is open</h2>
           <p class="register__text">
-            Seats are limited. Save yours for Open Source Day on Sunday, 25 October 2026.
+            Seats are limited. Save yours for Open Source Day on Sunday, 25 October 2026. Claim your
+            spot below.
           </p>
-          <a class="btn btn--primary btn--xl" href="#register" data-register-link>Register now</a>
+
+          <div class="register-card" id="register-card">
+            <!-- Floating Tux mascot -->
+            <div class="register-card__mascot anim-float" aria-hidden="true">
+              <img
+                src="/registration_tux.png"
+                alt="WLUG Tux Mascot"
+                width="142"
+                height="182"
+                loading="eager"
+                decoding="async"
+              />
+            </div>
+
+            <!-- Header -->
+            <div class="register-card__header">
+              <span class="register-card__tag">Claim Your Spot</span>
+              <h3 class="register-card__title">Enter the Haunted Realm</h3>
+              <p class="register-card__subtitle">
+                Your journey into the world of Open Source begins here.
+              </p>
+            </div>
+
+            <!-- Registration Form (6 required fields, in exact order) -->
+            <form class="register-form" id="register-form" novalidate>
+              <!-- 1. Name -->
+              <div class="form-group" id="group-name">
+                <label class="form-label" for="name">
+                  <span>Name <span class="form-label__required" aria-hidden="true">*</span></span>
+                  <span class="form-label__hint">Full name</span>
+                </label>
+                <div class="form-control-wrap">
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                    aria-required="true"
+                    aria-describedby="name-error"
+                  />
+                </div>
+                <div class="form-error" id="name-error" role="alert" aria-live="polite">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                    />
+                  </svg>
+                  <span>Please enter your full name.</span>
+                </div>
+              </div>
+
+              <!-- 2. Email ID -->
+              <div class="form-group" id="group-email">
+                <label class="form-label" for="email">
+                  <span
+                    >Email ID <span class="form-label__required" aria-hidden="true">*</span></span
+                  >
+                  <span class="form-label__hint">For ticket &amp; cert</span>
+                </label>
+                <div class="form-control-wrap">
+                  <input
+                    class="form-input"
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    autocomplete="email"
+                    required
+                    aria-required="true"
+                    aria-describedby="email-error"
+                  />
+                </div>
+                <div class="form-error" id="email-error" role="alert" aria-live="polite">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                    />
+                  </svg>
+                  <span>Please enter a valid email address.</span>
+                </div>
+              </div>
+
+              <!-- 3. Mobile Number -->
+              <div class="form-group" id="group-mobile_number">
+                <label class="form-label" for="mobile_number">
+                  <span
+                    >Mobile Number
+                    <span class="form-label__required" aria-hidden="true">*</span></span
+                  >
+                  <span class="form-label__hint">10-digit number</span>
+                </label>
+                <div class="form-control-wrap">
+                  <input
+                    class="form-input"
+                    type="tel"
+                    id="mobile_number"
+                    name="mobile_number"
+                    placeholder="Enter your mobile number"
+                    autocomplete="tel"
+                    required
+                    aria-required="true"
+                    aria-describedby="mobile_number-error"
+                  />
+                </div>
+                <div class="form-error" id="mobile_number-error" role="alert" aria-live="polite">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                    />
+                  </svg>
+                  <span>Please enter your mobile number.</span>
+                </div>
+              </div>
+
+              <!-- 4. College Name -->
+              <div class="form-group" id="group-college_name">
+                <label class="form-label" for="college_name">
+                  <span
+                    >College Name
+                    <span class="form-label__required" aria-hidden="true">*</span></span
+                  >
+                  <span class="form-label__hint">Institute name</span>
+                </label>
+                <div class="form-control-wrap">
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="college_name"
+                    name="college_name"
+                    placeholder="Enter your college name"
+                    autocomplete="organization"
+                    required
+                    aria-required="true"
+                    aria-describedby="college_name-error"
+                  />
+                </div>
+                <div class="form-error" id="college_name-error" role="alert" aria-live="polite">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                    />
+                  </svg>
+                  <span>Please enter your college name.</span>
+                </div>
+              </div>
+
+              <!-- 5. Year -->
+              <div class="form-group" id="group-year">
+                <label class="form-label" for="year">
+                  <span>Year <span class="form-label__required" aria-hidden="true">*</span></span>
+                  <span class="form-label__hint">Current study year</span>
+                </label>
+                <div class="form-control-wrap">
+                  <select
+                    class="form-select"
+                    id="year"
+                    name="year"
+                    required
+                    aria-required="true"
+                    aria-describedby="year-error"
+                  >
+                    <option value="" disabled selected>Select your year</option>
+                    <option value="First Year">First Year</option>
+                    <option value="Second Year">Second Year</option>
+                    <option value="Third Year">Third Year</option>
+                    <option value="Fourth Year">Fourth Year</option>
+                  </select>
+                  <svg class="form-select-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 10l5 5 5-5z" />
+                  </svg>
+                </div>
+                <div class="form-error" id="year-error" role="alert" aria-live="polite">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                    />
+                  </svg>
+                  <span>Please select your year.</span>
+                </div>
+              </div>
+
+              <!-- 6. Department -->
+              <div class="form-group" id="group-department">
+                <label class="form-label" for="department">
+                  <span
+                    >Department <span class="form-label__required" aria-hidden="true">*</span></span
+                  >
+                  <span class="form-label__hint">Branch of study</span>
+                </label>
+                <div class="form-control-wrap">
+                  <select
+                    class="form-select"
+                    id="department"
+                    name="department"
+                    required
+                    aria-required="true"
+                    aria-describedby="department-error"
+                  >
+                    <option value="" disabled selected>Select your department</option>
+                    <option value="Computer Science and Engineering">
+                      Computer Science and Engineering
+                    </option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="Electronics Engineering">Electronics Engineering</option>
+                    <option value="Electrical Engineering">Electrical Engineering</option>
+                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                    <option value="Civil Engineering">Civil Engineering</option>
+                    <option value="Artificial Intelligence and Machine Learning">
+                      Artificial Intelligence and Machine Learning
+                    </option>
+                    <option value="Robotics and Automation">Robotics and Automation</option>
+                  </select>
+                  <svg class="form-select-arrow" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 10l5 5 5-5z" />
+                  </svg>
+                </div>
+                <div class="form-error" id="department-error" role="alert" aria-live="polite">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+                    />
+                  </svg>
+                  <span>Please select your department.</span>
+                </div>
+              </div>
+
+              <!-- General Submission Error Banner (shown only if a server error occurs) -->
+              <div
+                id="form-general-error"
+                class="form-banner form-banner--error"
+                role="alert"
+                style="display: none"
+              ></div>
+
+              <!-- Prominent Orange Register Now CTA Button -->
+              <button
+                class="btn btn--primary btn--xl register-submit-btn"
+                type="submit"
+                id="submit-btn"
+              >
+                <span class="btn-spinner" aria-hidden="true"></span>
+                <span class="btn-text">Register Now</span>
+              </button>
+            </form>
+
+            <!-- Success Confirmation State (Theme-consistent pass) -->
+            <section
+              class="register-success-card"
+              id="register-success"
+              tabindex="-1"
+              aria-live="polite"
+            >
+              <div class="register-success-card__badge" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                </svg>
+              </div>
+              <h3 class="register-success-card__title">Spell Cast Successfully!</h3>
+              <p class="register-success-card__msg">
+                You have crossed into the realm of Open Source Day 2026. Keep this admission badge
+                safe!
+              </p>
+
+              <!-- Email Delivery Status Notification -->
+              <div
+                id="email-status-banner"
+                class="email-status-banner"
+                role="status"
+                aria-live="polite"
+                style="display: none"
+              ></div>
+
+              <div class="ticket">
+                <div class="ticket__header">
+                  <span class="ticket__event">WLUG OSD '26 Pass</span>
+                  <span class="ticket__pass-id" id="ticket-pass-id">OSD26-PASS</span>
+                </div>
+                <div class="ticket__grid">
+                  <div class="ticket__item ticket__full-width">
+                    <span class="ticket__label">Attendee</span>
+                    <span class="ticket__val" id="ticket-name">—</span>
+                  </div>
+                  <div class="ticket__item ticket__full-width">
+                    <span class="ticket__label">Email</span>
+                    <span class="ticket__val" id="ticket-email">—</span>
+                  </div>
+                  <div class="ticket__item">
+                    <span class="ticket__label">Mobile</span>
+                    <span class="ticket__val" id="ticket-mobile">—</span>
+                  </div>
+                  <div class="ticket__item">
+                    <span class="ticket__label">Year &amp; Dept</span>
+                    <span class="ticket__val" id="ticket-year-dept">—</span>
+                  </div>
+                  <div class="ticket__item ticket__full-width">
+                    <span class="ticket__label">College</span>
+                    <span class="ticket__val" id="ticket-college">—</span>
+                  </div>
+                </div>
+                <div class="ticket__footer">
+                  <span>Sunday, 25 October 2026</span>
+                  <span>WCE Sangli</span>
+                </div>
+              </div>
+
+              <div class="register-success-card__actions">
+                <a class="btn btn--primary btn--lg" href="#top">Back to the gate ↑</a>
+                <button class="btn btn--ghost btn--sm" type="button" id="btn-register-another">
+                  Register another attendee
+                </button>
+              </div>
+            </section>
+          </div>
         </div>
       </section>
     </main>
