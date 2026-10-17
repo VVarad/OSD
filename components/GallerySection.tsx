@@ -205,12 +205,22 @@ export default function GallerySection() {
       <div className="absolute bottom-10 left-1/3 w-[450px] h-[450px] bg-amber-600/10 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Section Header */}
-      <div className="relative z-10 text-center mb-10">
-        <h2 className="text-4xl md:text-5xl font-black text-amber-200 tracking-wide font-serif drop-shadow-md">
+      <div className="relative z-10 text-center mb-10 flex flex-col items-center">
+        <p className="flex items-center gap-3 text-[#ffd15c] text-base font-semibold mb-3">
+          <img
+            src="/assets/images/lantern-icon.webp"
+            alt=""
+            width={73}
+            height={120}
+            className="w-auto h-[34px] -rotate-2"
+          />
+          Stop 3: Memory Lane
+        </p>
+        <h2 className="text-4xl md:text-5xl font-normal text-[#f6f0ff] tracking-normal font-serif">
           The Hall of Memories
         </h2>
-        <p className="text-purple-300/80 text-sm md:text-base mt-2">
-          Click any floating portrait to view moments from the event
+        <p className="text-[#d8ccf0] text-sm md:text-base mt-3 max-w-[56ch]">
+          Click any floating frame to view
         </p>
       </div>
 
