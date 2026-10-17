@@ -536,11 +536,54 @@
 }
 
 .register-success-card__msg {
-  margin: 12px auto 24px;
+  margin: 12px auto 20px;
   color: var(--c-text-muted);
   font-size: 1.0625rem;
   line-height: 1.5;
   max-width: 38ch;
+}
+
+/* Email delivery status banner */
+.email-status-banner {
+  max-width: 480px;
+  margin: 0 auto 20px;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: left;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: fadeIn 0.3s ease;
+}
+
+.email-status-banner svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.email-status-banner--success {
+  background: rgb(16 185 129 / 0.15);
+  border: 1px solid rgb(16 185 129 / 0.45);
+  color: #a7f3d0;
+}
+
+.email-status-banner--warning {
+  background: rgb(245 158 11 / 0.16);
+  border: 1px solid rgb(245 158 11 / 0.45);
+  color: #fde68a;
+}
+
+.email-status-banner--pending {
+  background: rgb(138 77 255 / 0.15);
+  border: 1px solid rgb(138 77 255 / 0.35);
+  color: #e9d5ff;
 }
 
 /* Digital Admission Ticket / Pass */

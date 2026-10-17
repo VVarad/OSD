@@ -27,6 +27,7 @@ function multiPageRewritePlugin() {
 }
 
 export default defineConfig({
+  envDir: resolve(__dirname, '..'),
   plugins: [multiPageRewritePlugin()],
   server: { port: 5173, open: true },
   build: {

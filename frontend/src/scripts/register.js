@@ -8,6 +8,7 @@ import {
   insertRegistrationToSupabase,
   normalizeMobileNumber,
 } from './supabase.js';
+import { sendRegistrationConfirmationEmail } from './emailApi.js';
 
 // Available departments at Walchand College of Engineering, Sangli
 export const WCE_DEPARTMENTS = [
@@ -25,6 +26,16 @@ export const VALID_YEARS = ['First Year', 'Second Year', 'Third Year', 'Fourth Y
 
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
+function escapeHtml(str) {
+  if (typeof str !== 'string') return '';
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 /**
  * Validates a single field value.
@@ -174,6 +185,7 @@ export function initRegistration() {
   const submitText = submitBtn?.querySelector('.btn-text');
   const generalError = document.getElementById('form-general-error');
   const registerAnotherBtn = document.getElementById('btn-register-another');
+  const emailStatusBanner = document.getElementById('email-status-banner');
 
   if (!form) return;
 
@@ -337,6 +349,44 @@ export function initRegistration() {
         if (passIdEl) passIdEl.textContent = result.passId || 'OSD26-CONFIRMED';
 
         successCard.focus();
+
+        // 2. Dispatch Confirmation Email via Node.js Nodemailer API
+        if (emailStatusBanner) {
+          emailStatusBanner.className = 'email-status-banner email-status-banner--pending';
+          emailStatusBanner.innerHTML = `
+            <span class="btn-spinner" style="width: 16px; height: 16px; border-width: 2px; margin-right: 8px;" aria-hidden="true"></span>
+            <span>Sending registration confirmation email...</span>
+          `;
+          emailStatusBanner.style.display = 'flex';
+        }
+
+        try {
+          await sendRegistrationConfirmationEmail({
+            ...participant,
+            pass_id: result.passId,
+          });
+
+          if (emailStatusBanner) {
+            emailStatusBanner.className = 'email-status-banner email-status-banner--success';
+            emailStatusBanner.innerHTML = `
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+              </svg>
+              <span>A confirmation email with your pass details has been dispatched to <strong>${escapeHtml(participant.email)}</strong>.</span>
+            `;
+          }
+        } catch (emailErr) {
+          console.warn('[Registration] Email delivery notice:', emailErr.message);
+          if (emailStatusBanner) {
+            emailStatusBanner.className = 'email-status-banner email-status-banner--warning';
+            emailStatusBanner.innerHTML = `
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+              </svg>
+              <span>Registration saved successfully! However, we could not send the confirmation email. Please screenshot or save your pass details below.</span>
+            `;
+          }
+        }
       }
     } catch (err) {
       showGeneralError(
@@ -361,6 +411,11 @@ export function initRegistration() {
     registerAnotherBtn.addEventListener('click', () => {
       form.reset();
       hideGeneralError();
+      if (emailStatusBanner) {
+        emailStatusBanner.style.display = 'none';
+        emailStatusBanner.className = 'email-status-banner';
+        emailStatusBanner.innerHTML = '';
+      }
       fields.forEach((f) => {
         touched[f] = false;
         const el = document.getElementById(f);
