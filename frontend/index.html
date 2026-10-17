@@ -61,6 +61,7 @@
         <ul class="nav__links">
           <li><a href="#curriculum">Curriculum</a></li>
           <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#gallery">Gallery</a></li>
           <li><a href="#about-us">About us</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#events">Events</a></li>
@@ -453,6 +454,170 @@
             />
             <p class="note">Bring a laptop if you have one. PCs will be available at the venue.</p>
           </aside>
+        </div>
+      </section>
+
+      <!-- ============ GALLERY: The Hall of Memories ============ -->
+      <section id="gallery" class="stop gallery-section" data-gallery>
+        <div class="gallery-glow gallery-glow--purple" aria-hidden="true"></div>
+        <div class="gallery-glow gallery-glow--amber" aria-hidden="true"></div>
+
+        <div class="container gallery-header">
+          <p class="stop__label">
+            <img
+              class="stop__lantern"
+              src="/assets/images/lantern-icon.webp"
+              alt=""
+              width="73"
+              height="120"
+            />The Hall of Memories
+          </p>
+          <h2 class="gallery-title">The Hall of Memories</h2>
+          <p class="gallery-subtitle">Click any floating frame to view</p>
+        </div>
+
+        <!-- Floating Canvas with Anti-Gravity Portraits -->
+        <div class="gallery-canvas" data-gallery-canvas>
+          <!-- Portrait 1 -->
+          <div
+            class="gallery-portrait"
+            data-gallery-item
+            data-index="0"
+            style="width: 270px; height: 340px; top: 10%; left: 8%; --float-dur: 6.2s; --rot-drift: 2.5deg;"
+          >
+            <div class="gallery-portrait__float">
+              <div class="gallery-portrait__photo">
+                <img src="/gallery/event-1.jpg" alt="The Gathering" loading="lazy" decoding="async" />
+              </div>
+              <img
+                class="gallery-portrait__frame"
+                src="/frames/frame-gothic.png"
+                alt="Clay Frame"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+
+          <!-- Portrait 2 -->
+          <div
+            class="gallery-portrait"
+            data-gallery-item
+            data-index="1"
+            style="width: 290px; height: 360px; top: 8%; left: 40%; --float-dur: 7.8s; --rot-drift: -2deg;"
+          >
+            <div class="gallery-portrait__float">
+              <div class="gallery-portrait__photo">
+                <img src="/gallery/event-2.jpg" alt="Microservices Workshop" loading="lazy" decoding="async" />
+              </div>
+              <img
+                class="gallery-portrait__frame"
+                src="/frames/frame-oval.png"
+                alt="Clay Frame"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+
+          <!-- Portrait 3 -->
+          <div
+            class="gallery-portrait"
+            data-gallery-item
+            data-index="2"
+            style="width: 260px; height: 320px; top: 14%; left: 73%; --float-dur: 6.8s; --rot-drift: 2.8deg;"
+          >
+            <div class="gallery-portrait__float">
+              <div class="gallery-portrait__photo">
+                <img src="/gallery/event-3.jpg" alt="Git & GitHub Labs" loading="lazy" decoding="async" />
+              </div>
+              <img
+                class="gallery-portrait__frame"
+                src="/frames/frame-square.png"
+                alt="Clay Frame"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+
+          <!-- Portrait 4 -->
+          <div
+            class="gallery-portrait"
+            data-gallery-item
+            data-index="3"
+            style="width: 280px; height: 350px; top: 52%; left: 22%; --float-dur: 5.9s; --rot-drift: -1.7deg;"
+          >
+            <div class="gallery-portrait__float">
+              <div class="gallery-portrait__photo">
+                <img src="/gallery/event-4.jpg" alt="Terminal Sorcery" loading="lazy" decoding="async" />
+              </div>
+              <img
+                class="gallery-portrait__frame"
+                src="/frames/frame-oval.png"
+                alt="Clay Frame"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+
+          <!-- Portrait 5 -->
+          <div
+            class="gallery-portrait"
+            data-gallery-item
+            data-index="4"
+            style="width: 275px; height: 345px; top: 54%; left: 62%; --float-dur: 7.4s; --rot-drift: 2.1deg;"
+          >
+            <div class="gallery-portrait__float">
+              <div class="gallery-portrait__photo">
+                <img src="/gallery/event-5.jpg" alt="The Finale" loading="lazy" decoding="async" />
+              </div>
+              <img
+                class="gallery-portrait__frame"
+                src="/frames/frame-gothic.png"
+                alt="Clay Frame"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Lightbox Slider Modal -->
+        <div class="gallery-modal" data-gallery-modal aria-hidden="true" role="dialog" aria-modal="true" aria-label="Photo Lightbox">
+          <div class="gallery-modal__content" onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button class="gallery-modal__close" data-modal-close aria-label="Close lightbox">
+              <span>CLOSE</span> ✕
+            </button>
+
+            <!-- Slider Viewport with Static Clay Frame -->
+            <div class="gallery-modal__viewport">
+              <!-- Sliding Photo Mask -->
+              <div class="gallery-modal__mask" data-modal-mask title="Swipe left or right">
+                <div class="gallery-modal__slider" data-modal-slider></div>
+              </div>
+
+              <!-- Clay Frame Bezel Overlay -->
+              <img class="gallery-modal__bezel" data-modal-bezel src="/frames/frame-gothic.png" alt="Frame Bezel" />
+
+              <!-- Previous / Next Controls -->
+              <button class="gallery-modal__nav gallery-modal__nav--prev" data-modal-prev aria-label="Previous photo">
+                ◀
+              </button>
+              <button class="gallery-modal__nav gallery-modal__nav--next" data-modal-next aria-label="Next photo">
+                ▶
+              </button>
+            </div>
+
+            <!-- Caption and Page Indicator -->
+            <div class="gallery-modal__meta">
+              <h3 class="gallery-modal__title" data-modal-title>The Gathering</h3>
+              <p class="gallery-modal__caption" data-modal-caption>Attendees kicking off the day at WCE.</p>
+              <span class="gallery-modal__counter" data-modal-counter>1 / 5</span>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -1,0 +1,425 @@
+/* ========================================================
+   GALLERY SECTION: The Hall of Memories
+   Anti-Gravity Floating Wall + Lightbox Slider
+   ======================================================== */
+
+.gallery-section {
+  position: relative;
+  width: 100%;
+  min-height: 110vh;
+  background-color: #0E081F;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 100px 0 110px;
+}
+
+/* Background atmospheric glow effects */
+.gallery-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.gallery-glow--purple {
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(650px, 90vw);
+  height: min(650px, 90vw);
+  background: radial-gradient(circle, rgba(138, 77, 255, 0.22) 0%, rgba(88, 28, 135, 0.12) 45%, transparent 70%);
+  filter: blur(120px);
+}
+
+.gallery-glow--amber {
+  bottom: 8%;
+  left: 32%;
+  width: min(380px, 70vw);
+  height: min(380px, 70vw);
+  background: radial-gradient(circle, rgba(255, 122, 0, 0.18) 0%, rgba(217, 119, 6, 0.08) 50%, transparent 70%);
+  filter: blur(85px);
+}
+
+/* Section Header */
+.gallery-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.gallery-header .stop__label {
+  justify-content: center;
+}
+
+.gallery-title {
+  font-family: var(--font-display), 'Georgia', serif;
+  font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+  font-weight: 900;
+  color: #fef08a; /* amber-200 */
+  letter-spacing: 0.03em;
+  text-shadow:
+    0 4px 20px rgba(255, 122, 0, 0.35),
+    0 2px 4px rgba(0, 0, 0, 0.8);
+  margin-bottom: 10px;
+}
+
+.gallery-subtitle {
+  color: rgba(216, 180, 254, 0.85); /* purple-300 / 80 */
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  font-weight: 500;
+  max-width: 48ch;
+  margin-inline: auto;
+}
+
+/* Floating Anti-Gravity Canvas */
+.gallery-canvas {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  min-height: 650px;
+  touch-action: none;
+}
+
+/* Individual Floating Portrait Item */
+.gallery-portrait {
+  position: absolute;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.65));
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.gallery-portrait:hover {
+  z-index: 40 !important;
+  transform: scale(1.05) !important;
+  filter:
+    drop-shadow(0 20px 40px rgba(0, 0, 0, 0.85))
+    drop-shadow(0 0 25px rgba(255, 122, 0, 0.35));
+}
+
+.gallery-portrait:active,
+.gallery-portrait.is-dragging {
+  cursor: grabbing;
+  transform: scale(0.98);
+}
+
+/* Anti-gravity float wrapper that executes the bobbing & rotation drift */
+.gallery-portrait__float {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: portrait-float var(--float-dur, 6s) ease-in-out infinite alternate,
+             portrait-rot calc(var(--float-dur, 6s) * 1.25) ease-in-out infinite alternate;
+}
+
+@keyframes portrait-float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+  100% {
+    transform: translateY(14px);
+  }
+}
+
+@keyframes portrait-rot {
+  0% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: var(--rot-drift, 2deg);
+  }
+  100% {
+    rotate: calc(var(--rot-drift, 2deg) * -1);
+  }
+}
+
+/* Inner Photo Layer (sitting underneath the clay frame) */
+.gallery-portrait__photo {
+  position: absolute;
+  width: 62%;
+  height: 66%;
+  overflow: hidden;
+  border-radius: 4px;
+  z-index: 10;
+  background-color: #0c071a;
+}
+
+.gallery-portrait__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  user-select: none;
+  transition: transform 0.4s ease;
+}
+
+.gallery-portrait:hover .gallery-portrait__photo img {
+  transform: scale(1.04);
+}
+
+/* 3D Clay Frame Bezel Overlay */
+.gallery-portrait__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* ========================================================
+   LIGHTBOX SLIDER MODAL
+   ======================================================== */
+
+.gallery-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+
+.gallery-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gallery-modal__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 480px;
+  width: 100%;
+  transform: scale(0.85) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.18, 0.9, 0.25, 1.15);
+}
+
+.gallery-modal.is-open .gallery-modal__content {
+  transform: scale(1) translateY(0);
+}
+
+/* Close Button */
+.gallery-modal__close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  background: none;
+  border: none;
+  color: rgba(254, 240, 138, 0.85); /* amber-200/80 */
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  transition: color 0.18s ease, transform 0.18s ease, background 0.18s ease;
+}
+
+.gallery-modal__close:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+/* Viewport for the Slider Frame */
+.gallery-modal__viewport {
+  position: relative;
+  width: 320px;
+  height: 410px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.95));
+}
+
+@media (min-width: 640px) {
+  .gallery-modal__viewport {
+    width: 400px;
+    height: 500px;
+  }
+}
+
+/* Sliding Photo Mask: sits precisely inside the clay frame opening */
+.gallery-modal__mask {
+  position: absolute;
+  width: 62%;
+  height: 66%;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.6);
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.gallery-modal__mask:active {
+  cursor: grabbing;
+}
+
+.gallery-modal__slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-modal__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: transform 0.35s cubic-bezier(0.2, 0.85, 0.3, 1), opacity 0.25s ease;
+  will-change: transform, opacity;
+}
+
+/* Bezel overlay stays static in the center */
+.gallery-modal__bezel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Left / Right Controls */
+.gallery-modal__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(22, 12, 40, 0.88);
+  border: 1px solid rgba(138, 77, 255, 0.35);
+  color: #ffd15c;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 30;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gallery-modal__nav:hover {
+  background: rgba(45, 26, 77, 0.95);
+  border-color: rgba(255, 123, 28, 0.6);
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 24px rgba(255, 123, 28, 0.3);
+}
+
+.gallery-modal__nav--prev {
+  left: -16px;
+}
+
+.gallery-modal__nav--next {
+  right: -16px;
+}
+
+@media (min-width: 768px) {
+  .gallery-modal__nav {
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+  }
+  .gallery-modal__nav--prev {
+    left: -58px;
+  }
+  .gallery-modal__nav--next {
+    right: -58px;
+  }
+}
+
+/* Caption and Page Indicator */
+.gallery-modal__meta {
+  text-align: center;
+  margin-top: 22px;
+  z-index: 30;
+  max-width: 380px;
+}
+
+.gallery-modal__title {
+  font-family: var(--font-display), 'Georgia', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fef08a; /* amber-200 */
+}
+
+.gallery-modal__caption {
+  font-size: 0.92rem;
+  color: rgba(216, 180, 254, 0.85); /* purple-300 / 80 */
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+.gallery-modal__counter {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(75, 35, 144, 0.45);
+  border: 1px solid rgba(138, 77, 255, 0.25);
+  color: #c9a8ff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+/* Pause animations when offscreen */
+.is-offscreen .gallery-portrait__float {
+  animation-play-state: paused !important;
+}
+
+/* Responsive Canvas adjustments for mobile & small tablet */
+@media (max-width: 768px) {
+  .gallery-canvas {
+    height: auto;
+    min-height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    padding: 20px 10px;
+  }
+
+  .gallery-portrait {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 220px !important;
+    height: 280px !important;
+    margin: 8px;
+  }
+}

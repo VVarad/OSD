@@ -10,6 +10,7 @@ import { initEventCards } from './event-cards.js';
 import { initHeroParallax } from './hero-parallax.js';
 import { initOffscreenPause } from './motion.js';
 import { initFog } from './fog/fog.js';
+import { initGallery } from './gallery.js';
 import { prefersReducedMotion, isLowPowerDevice } from './device.js';
 
 function applyLinks() {
@@ -32,6 +33,7 @@ function init() {
   initFaq(document.querySelector('[data-faq]'));
   initSessions(document.querySelector('[data-sessions]'));
   initEventCards();
+  initGallery(document.querySelector('[data-gallery]'));
   initOffscreenPause(document.querySelectorAll('main > section'));
 
   const hero = document.querySelector('[data-hero]');
