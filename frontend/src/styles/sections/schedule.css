@@ -63,7 +63,7 @@
 }
 
 .schedule__aside {
-  flex: 1 1 320px;
+  flex: 1 1 420px;
   min-width: 0;
   align-self: center;
   display: flex;
@@ -73,7 +73,7 @@
   text-align: center;
 }
 .schedule__tree {
-  width: min(380px, 100%);
+  width: min(494px, 100%);
   filter: drop-shadow(0 26px 30px rgb(0 0 0 / 0.5)) drop-shadow(0 0 30px rgb(255 170 60 / 0.15));
 }
 

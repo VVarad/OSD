@@ -239,6 +239,11 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--c-text-faint);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.scroll__meta span {
+  white-space: nowrap;
 }
 .scroll__close {
   display: inline-grid;
@@ -300,17 +305,28 @@
   .sign__title {
     font-size: 0.9375rem;
   }
-  .scroll {
-    position: absolute;
-    inset: 6px;
-    width: auto;
-    max-width: none;
-    padding: 16px 18px;
+  .scroll,
+  .scroll--one,
+  .scroll--two {
+    position: relative;
+    inset: auto;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-top: 6px;
+    padding: 18px 20px;
     border-radius: 18px;
-    overflow-y: auto;
-    z-index: 35;
+    overflow-y: visible;
+    z-index: 5;
   }
-  .scroll::before {
+  .scroll::before,
+  .scroll--one::before,
+  .scroll--two::before {
     display: none;
   }
 }
