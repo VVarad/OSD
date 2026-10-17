@@ -56,7 +56,7 @@
   padding: 24px var(--gutter) 16px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .register-page__brand {
