@@ -11,20 +11,23 @@ dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
 
 export const env = {
   PORT: parseInt(process.env.PORT || '5000', 10),
-  EMAIL_USER: (process.env.EMAIL_USER || '').trim(),
-  EMAIL_APP_PASSWORD: (process.env.EMAIL_APP_PASSWORD || '').trim().replace(/\s+/g, ''),
+  SMTP_HOST: (process.env.SMTP_HOST || '').trim(),
+  SMTP_PORT: parseInt(process.env.SMTP_PORT || '465', 10),
+  SMTP_USER: (process.env.SMTP_USER || '').trim(),
+  SMTP_PASSWORD: (process.env.SMTP_PASSWORD || '').trim(),
   EMAIL_FROM_NAME: (process.env.EMAIL_FROM_NAME || 'OSD 2K26 Team').trim(),
   FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:5173',
 };
 
 export function validateEnv() {
   const missing = [];
-  if (!env.EMAIL_USER) missing.push('EMAIL_USER');
-  if (!env.EMAIL_APP_PASSWORD) missing.push('EMAIL_APP_PASSWORD');
+  if (!env.SMTP_HOST) missing.push('SMTP_HOST');
+  if (!env.SMTP_USER) missing.push('SMTP_USER');
+  if (!env.SMTP_PASSWORD) missing.push('SMTP_PASSWORD');
 
   if (missing.length > 0) {
     console.warn(`[Config] Warning: Missing environment variables: ${missing.join(', ')}`);
   } else {
-    console.log(`[Config] Nodemailer configured for user: ${env.EMAIL_USER}`);
+    console.log(`[Config] Nodemailer configured for ${env.SMTP_USER} via ${env.SMTP_HOST}:${env.SMTP_PORT}`);
   }
 }

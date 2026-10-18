@@ -3,28 +3,34 @@ import { env } from './env.js';
 
 export function createMailerTransporter() {
   return nodemailer.createTransport({
-    service: 'gmail',
+    host: env.SMTP_HOST,
+    port: env.SMTP_PORT,
+    secure: env.SMTP_PORT === 465, // SSL on 465, STARTTLS on 587
     auth: {
-      user: env.EMAIL_USER,
-      pass: env.EMAIL_APP_PASSWORD,
+      user: env.SMTP_USER,
+      pass: env.SMTP_PASSWORD,
     },
+    connectionTimeout: 20000,
+    greetingTimeout: 20000,
+    socketTimeout: 30000,
   });
 }
 
 export const transporter = createMailerTransporter();
 
 export async function verifyMailer() {
-  if (!env.EMAIL_USER || !env.EMAIL_APP_PASSWORD) {
-    console.warn('[Mailer] Gmail SMTP credentials not fully configured.');
+  if (!env.SMTP_HOST || !env.SMTP_USER || !env.SMTP_PASSWORD) {
+    console.warn('[Mailer] SMTP credentials not fully configured.');
     return false;
   }
 
   try {
     await transporter.verify();
-    console.log('[Mailer] Gmail SMTP connection verified successfully.');
+    console.log('[Mailer] SMTP connection verified successfully.');
     return true;
   } catch (err) {
-    console.error('[Mailer] Gmail SMTP verification failed:', err.message);
+    console.log('[debug]', env.SMTP_HOST, env.SMTP_PORT, env.SMTP_USER);
+    console.error('[Mailer] SMTP verification failed:', err.message);
     return false;
   }
 }

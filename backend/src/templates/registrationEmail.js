@@ -37,71 +37,69 @@ export function generateRegistrationEmailHtml(data) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to OSD 2K26!</title>
-  <!--[if mso]>
-  <style type="text/css">
-    body, table, td {font-family: Arial, Helvetica, sans-serif !important;}
-  </style>
-  <![endif]-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Open Source Day 2k26 Registration</title>
 </head>
-<body style="margin: 0; padding: 0; background-color: #f3f4f6; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; color: #1f2937;">
-  <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #f3f4f6; padding: 32px 16px;">
+
+<body style="margin:0;padding:0;background:#f4f4f4;">
+
+<table role="presentation"
+       width="100%"
+       border="0"
+       cellpadding="0"
+       cellspacing="0"
+       style="border-collapse:collapse;background:#f4f4f4;padding:40px 0;">
+
+<tr>
+<td align="center">
+
+<table role="presentation"
+       width="600"
+       border="0"
+       cellpadding="0"
+       cellspacing="0"
+       style="border-collapse:collapse;width:100%;max-width:600px;background:#ffffff;">
+
+    <!-- Banner -->
     <tr>
-      <td align="center">
-        <!-- Main Email Container -->
-        <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width: 600px; width: 100%; border-collapse: separate;">
-          
-          <!-- Black Header with Orange Branding -->
-          <tr>
-            <td style="background-color: #0b0c10; padding: 28px 24px; border-radius: 12px 12px 0 0; text-align: center; border-bottom: 3px solid #ff7700;">
-              <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td align="center">
-                    <span style="display: inline-block; background-color: #ff7700; color: #0b0c10; font-size: 11px; font-weight: 800; letter-spacing: 2px; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; margin-bottom: 8px;">
-                      WLUG PRESENTS
-                    </span>
-                    <h2 style="margin: 6px 0 0 0; color: #ff7700; font-size: 26px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;">
-                      OPEN SOURCE DAY 2K26
-                    </h2>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
+        <td style="padding:0;margin:0;line-height:0;font-size:0;">
+            <img
+                src="https://res.cloudinary.com/yy2txahg/image/upload/f_auto/q_auto/WhatsApp_Image_2026-10-17_at_10.33.18_PM_njhnkf.jpg"
+                alt="Open Source Day 2k26"
+                width="600"
+                style="display:block;width:100%;max-width:600px;height:auto;border:0;outline:none;text-decoration:none;">
+        </td>
+    </tr>
 
-          <!-- White Content Card -->
-          <tr>
-            <td style="background-color: #ffffff; padding: 36px 32px; border-radius: 0 0 12px 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); border: 1px solid #e5e7eb; border-top: none;">
-              
-              <!-- Registration Confirmed Badge -->
-              <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 20px;">
-                <tr>
-                  <td style="background-color: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 9999px; padding: 6px 14px;">
-                    <span style="color: #065f46; font-size: 13px; font-weight: 700; letter-spacing: 0.5px;">
-                      &#10003; Registration Confirmed
-                    </span>
-                  </td>
-                </tr>
-              </table>
+    <!-- Main Content -->
+    <tr>
+        <td style="padding:35px 40px;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;color:#555555;font-size:17px;line-height:1.6;text-align:center;">
 
-              <!-- Main Heading -->
-              <h1 style="margin: 0 0 16px 0; color: #111827; font-size: 24px; font-weight: 800; line-height: 1.3;">
-                Welcome to OSD 2K26! &#128640;
-              </h1>
+            <h1 style="margin:0 0 25px;font-size:26px;color:#2c3e50;font-weight:600;">
+                Hola Open Source Enthusiasts! 🐧
+            </h1>
 
-              <!-- Personalized Greeting -->
-              <p style="margin: 0 0 14px 0; font-size: 16px; color: #374151; line-height: 1.6;">
-                Hi <strong>${name}</strong>,
-              </p>
-              
-              <p style="margin: 0 0 24px 0; font-size: 15px; color: #4b5563; line-height: 1.6;">
-                Your registration for <strong>Open Source Day 2026</strong> has been received and verified. We are thrilled to welcome you to this celebration of Linux, open source technologies, and community spirit!
-              </p>
+            <div style="display:inline-block;background:#9a59e2;color:#ffffff;padding:10px 24px;border-radius:25px;font-weight:600;">
+                Registration Confirmed
+            </div>
 
-              <!-- Ticket / Registration Details Box -->
-              <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 28px;">
+            <p>
+                We are <strong>pleased to inform you</strong> that your registration
+                for <strong>Open Source Day 2k26</strong> was successful! 🎉
+            </p>
+
+            <p>
+                The event will be held on
+                <strong>25th October 2026</strong>,
+            </p>
+
+            <p>
+                You will have access to all sessions and activities as a registered participant.
+            </p>
+
+            <!-- Event Details -->
+            <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin-bottom: 28px;">
                 <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-bottom: 12px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
                   <tr>
                     <td style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 1px;">
@@ -149,45 +147,59 @@ export function generateRegistrationEmailHtml(data) {
                 </table>
               </div>
 
-              <!-- Note / Guidelines -->
-              <p style="margin: 0 0 16px 0; font-size: 14px; color: #4b5563; line-height: 1.6;">
-                Please preserve this email or your Pass ID (<strong>${passId}</strong>) for desk check-in at the venue.
-              </p>
+                     
 
-              <!-- Thank you & Sign-off -->
-              <p style="margin: 0 0 8px 0; font-size: 14px; color: #374151; line-height: 1.6;">
-                Thank you for being a part of this journey with us. See you at OSD 2K26!
-              </p>
-              
-              <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #f1f5f9;">
-                <p style="margin: 0; font-size: 14px; color: #4b5563;">Warm regards,</p>
-                <p style="margin: 4px 0 0 0; font-size: 15px; font-weight: 700; color: #111827;">
-                  Walchand Linux Users&#39; Group (WLUG)
-                </p>
-                <p style="margin: 2px 0 0 0; font-size: 13px; color: #64748b;">
-                  Walchand College of Engineering, Sangli
-                </p>
-              </div>
+            <p>
+                Please don't hesitate to contact us if you have any questions.
+            </p>
 
-            </td>
-          </tr>
+            <p>
+                <strong>Website:</strong><br>
+                <a href="https://osd2k26.wcewlug.org/"
+                   style="color:#9a59e2;text-decoration:none;">
+                    osd2k26.wcewlug.org
+                </a>
+            </p>
 
-          <!-- Footer -->
-          <tr>
-            <td style="padding: 24px 16px; text-align: center;">
-              <p style="margin: 0 0 6px 0; font-size: 12px; color: #6b7280;">
-                Walchand Linux Users&#39; Group &bull; Community | Knowledge | Share
-              </p>
-              <p style="margin: 0; font-size: 11px; color: #9ca3af;">
-                This confirmation was sent automatically following your registration on the WLUG OSD 2K26 portal.
-              </p>
-            </td>
-          </tr>
+            
+            <p><em>We look forward to seeing you there!</em></p>
 
-        </table>
-      </td>
+            <p>
+                Thanks and regards,<br><br>
+
+                <strong>Walchand Linux Users' Group</strong><br>
+                Community | Knowledge | Share
+            </p>
+
+        </td>
     </tr>
-  </table>
+
+    <!-- Footer -->
+    <tr>
+        <td style="background:#000000;padding:25px;text-align:center;font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;font-size:14px;color:#ffffff;">
+
+            <p style="margin:0 0 15px;">
+                <a href="https://linkedin.com/company/wlug-club" style="color:#cea1ff;text-decoration:none;">LinkedIn</a>
+                &nbsp; | &nbsp;
+                <a href="https://instagram.com/wcewlug" style="color:#cea1ff;text-decoration:none;">Instagram</a>
+                &nbsp; | &nbsp;
+                <a href="https://twitter.com/wcewlug" style="color:#cea1ff;text-decoration:none;">Twitter</a>
+            </p>
+
+            <p style="margin:0;">
+                © 2026 WCE WLUG • Walchand College of Engineering, Sangli
+            </p>
+
+        </td>
+    </tr>
+
+</table>
+
+</td>
+</tr>
+
+</table>
+
 </body>
 </html>`;
 }

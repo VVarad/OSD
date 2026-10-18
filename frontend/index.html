@@ -61,6 +61,7 @@
         <ul class="nav__links">
           <li><a href="#curriculum">Curriculum</a></li>
           <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#gallery">Gallery</a></li>
           <li><a href="#about-us">About us</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#events">Events</a></li>
@@ -265,7 +266,8 @@
                 aria-expanded="false"
                 aria-controls="session-1"
               >
-                <span class="sign__kicker">Session 1</span><b class="sign__title">Microservices</b>
+                <span class="sign__kicker">Session 1</span
+                ><b class="sign__title">Breaking the monolith</b>
               </button>
               <button
                 type="button"
@@ -274,8 +276,7 @@
                 aria-expanded="false"
                 aria-controls="session-2"
               >
-                <span class="sign__kicker">Session 2</span
-                ><b class="sign__title">Git &amp; GitHub</b>
+                <span class="sign__kicker">Session 2</span><b class="sign__title">Git in focus</b>
               </button>
 
               <div
@@ -408,8 +409,8 @@
                     loading="lazy"
                     decoding="async"
                   />
-                  <span class="trail__time">10:00 AM</span>
-                  <span class="trail__title">Session 1: Microservices</span>
+                  <span class="trail__time">9:30 AM</span>
+                  <span class="trail__title">Session 1: Breaking the monolith</span>
                 </li>
                 <li class="trail__item" style="--i: 1">
                   <img
@@ -435,7 +436,7 @@
                     decoding="async"
                   />
                   <span class="trail__time">2:30 PM</span>
-                  <span class="trail__title">Session 2: Git &amp; GitHub</span>
+                  <span class="trail__title">Session 2: Git in focus</span>
                 </li>
               </ol>
             </div>
@@ -456,7 +457,393 @@
         </div>
       </section>
 
-      <!-- ============ STOP 3: about us ============ -->
+      <!-- ============ GALLERY: The Hall of Memories ============ -->
+      <section id="gallery" class="stop gallery-section" data-gallery>
+        <div class="gallery-glow gallery-glow--purple" aria-hidden="true"></div>
+        <div class="gallery-glow gallery-glow--amber" aria-hidden="true"></div>
+
+        <div class="container gallery-header">
+          <p class="stop__label">
+            <img
+              class="stop__lantern"
+              src="/assets/images/lantern-icon.webp"
+              alt=""
+              width="73"
+              height="120"
+            />Stop 3: Memory Lane
+          </p>
+          <h2 class="stop__title">The Hall of Memories</h2>
+          <p class="stop__text">Click any floating frame to view</p>
+        </div>
+
+        <!-- Pinned Salon Wall Exhibition Frame -->
+        <div class="gallery-wall-wrapper">
+          <div class="gallery-wall-frame" data-gallery-canvas>
+            <!-- Master Rectangular Frame Overlay -->
+            <img
+              class="gallery-wall-master-frame"
+              src="/frames/frame-square.webp"
+              alt="Ornate Rectangular Master Frame"
+              width="1320"
+              height="885"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <!-- Portrait 1 (Top-Left: The Gathering - Sirius Black Position) -->
+            <div
+              class="gallery-portrait"
+              data-gallery-item
+              data-index="0"
+              data-frame="gold"
+              style="
+                width: 165px;
+                height: 190px;
+                top: 25px;
+                left: 55px;
+                --float-dist: 5px;
+                --float-dur: 6.2s;
+                --rot-drift: 0.9deg;
+              "
+            >
+              <div class="gallery-portrait__float">
+                <span class="gallery-portrait__pin" aria-hidden="true"></span>
+                <div class="gallery-portrait__photo">
+                  <img
+                    src="/gallery/event-1.webp"
+                    alt="The Gathering"
+                    width="165"
+                    height="190"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="gallery-portrait__bezel" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Portrait 2 (Top-Center: Microservices Workshop - McGonagall/Umbridge Position) -->
+            <div
+              class="gallery-portrait"
+              data-gallery-item
+              data-index="1"
+              data-frame="gold"
+              style="
+                width: 200px;
+                height: 135px;
+                top: 20px;
+                left: 370px;
+                --float-dist: 6px;
+                --float-dur: 7.2s;
+                --rot-drift: -0.8deg;
+              "
+            >
+              <div class="gallery-portrait__float">
+                <span class="gallery-portrait__pin" aria-hidden="true"></span>
+                <div class="gallery-portrait__photo">
+                  <img
+                    src="/gallery/event-2.webp"
+                    alt="Microservices Workshop"
+                    width="200"
+                    height="135"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="gallery-portrait__bezel" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Portrait 3 (Top-Right: Git & GitHub Labs - Bellatrix/Hooch Position) -->
+            <div
+              class="gallery-portrait"
+              data-gallery-item
+              data-index="2"
+              data-frame="gold"
+              style="
+                width: 165px;
+                height: 190px;
+                top: 25px;
+                left: 720px;
+                --float-dist: 5px;
+                --float-dur: 6.6s;
+                --rot-drift: 1.1deg;
+              "
+            >
+              <div class="gallery-portrait__float">
+                <span class="gallery-portrait__pin" aria-hidden="true"></span>
+                <div class="gallery-portrait__photo">
+                  <img
+                    src="/gallery/event-3.webp"
+                    alt="Git & GitHub Labs"
+                    width="165"
+                    height="190"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="gallery-portrait__bezel" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Portrait 4 (Mid-Left: Terminal Sorcery - Lucius Malfoy Position) -->
+            <div
+              class="gallery-portrait"
+              data-gallery-item
+              data-index="3"
+              data-frame="gold"
+              style="
+                width: 165px;
+                height: 215px;
+                top: 195px;
+                left: 180px;
+                --float-dist: 5px;
+                --float-dur: 5.8s;
+                --rot-drift: -0.9deg;
+              "
+            >
+              <div class="gallery-portrait__float">
+                <span class="gallery-portrait__pin" aria-hidden="true"></span>
+                <div class="gallery-portrait__photo">
+                  <img
+                    src="/gallery/event-4.webp"
+                    alt="Terminal Sorcery"
+                    width="165"
+                    height="215"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="gallery-portrait__bezel" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Portrait 5 (GRAND CENTERPIECE: The Grand Assembly - Dumbledore Position) -->
+            <div
+              class="gallery-portrait"
+              data-gallery-item
+              data-index="4"
+              data-centerpiece="true"
+              data-frame="silver"
+              style="
+                width: 220px;
+                height: 280px;
+                top: 165px;
+                left: 360px;
+                z-index: 15;
+                --float-dist: 4px;
+                --float-dur: 8s;
+                --rot-drift: 0.6deg;
+              "
+            >
+              <div class="gallery-portrait__float">
+                <span class="gallery-portrait__pin" aria-hidden="true"></span>
+                <div class="gallery-portrait__photo">
+                  <img
+                    src="/gallery/event-5.webp"
+                    alt="The Grand Assembly"
+                    width="220"
+                    height="280"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="gallery-portrait__bezel" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Portrait 6 (Mid-Right: Code & Collaboration - Severus Snape Position) -->
+            <div
+              class="gallery-portrait"
+              data-gallery-item
+              data-index="5"
+              data-frame="gold"
+              style="
+                width: 165px;
+                height: 215px;
+                top: 195px;
+                left: 595px;
+                --float-dist: 5px;
+                --float-dur: 6.5s;
+                --rot-drift: 0.9deg;
+              "
+            >
+              <div class="gallery-portrait__float">
+                <span class="gallery-portrait__pin" aria-hidden="true"></span>
+                <div class="gallery-portrait__photo">
+                  <img
+                    src="/gallery/event-6.webp"
+                    alt="Code & Collaboration"
+                    width="165"
+                    height="215"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="gallery-portrait__bezel" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Portrait 7 (Bottom-Left: The Mentorship Circle - Hagrid Position) -->
+            <div
+              class="gallery-portrait"
+              data-gallery-item
+              data-index="6"
+              data-frame="bronze"
+              style="
+                width: 165px;
+                height: 220px;
+                top: 360px;
+                left: 55px;
+                --float-dist: 6px;
+                --float-dur: 6.4s;
+                --rot-drift: 1deg;
+              "
+            >
+              <div class="gallery-portrait__float">
+                <span class="gallery-portrait__pin" aria-hidden="true"></span>
+                <div class="gallery-portrait__photo">
+                  <img
+                    src="/gallery/event-7.webp"
+                    alt="The Mentorship Circle"
+                    width="165"
+                    height="220"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="gallery-portrait__bezel" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Portrait 8 (Bottom-Center: Open Source Odyssey - Rita/Hedwig Position) -->
+            <div
+              class="gallery-portrait"
+              data-gallery-item
+              data-index="7"
+              data-frame="gold"
+              style="
+                width: 200px;
+                height: 125px;
+                top: 465px;
+                left: 370px;
+                --float-dist: 5px;
+                --float-dur: 7s;
+                --rot-drift: -0.8deg;
+              "
+            >
+              <div class="gallery-portrait__float">
+                <span class="gallery-portrait__pin" aria-hidden="true"></span>
+                <div class="gallery-portrait__photo">
+                  <img
+                    src="/gallery/event-8.webp"
+                    alt="Open Source Odyssey"
+                    width="200"
+                    height="125"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="gallery-portrait__bezel" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Portrait 9 (Bottom-Right: The Finale - Gilderoy Lockhart Position) -->
+            <div
+              class="gallery-portrait"
+              data-gallery-item
+              data-index="8"
+              data-frame="gold"
+              style="
+                width: 165px;
+                height: 220px;
+                top: 360px;
+                left: 720px;
+                --float-dist: 6px;
+                --float-dur: 6.8s;
+                --rot-drift: -1deg;
+              "
+            >
+              <div class="gallery-portrait__float">
+                <span class="gallery-portrait__pin" aria-hidden="true"></span>
+                <div class="gallery-portrait__photo">
+                  <img
+                    src="/gallery/event-9.webp"
+                    alt="The Finale"
+                    width="165"
+                    height="220"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div class="gallery-portrait__bezel" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lightbox Slider Modal -->
+        <div
+          class="gallery-modal"
+          data-gallery-modal
+          aria-hidden="true"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Photo Lightbox"
+        >
+          <div class="gallery-modal__content" onclick="event.stopPropagation()">
+            <!-- Close Button -->
+            <button class="gallery-modal__close" data-modal-close aria-label="Close lightbox">
+              <span>CLOSE</span> ✕
+            </button>
+
+            <!-- Slider Viewport with Static Clay Frame -->
+            <div class="gallery-modal__viewport">
+              <!-- Sliding Photo Mask -->
+              <div class="gallery-modal__mask" data-modal-mask title="Swipe left or right">
+                <div class="gallery-modal__slider" data-modal-slider></div>
+              </div>
+
+              <!-- Rectangular Frame Bezel Overlay -->
+              <img
+                class="gallery-modal__bezel"
+                data-modal-bezel
+                src="/frames/frame-square.webp"
+                alt="Frame Bezel"
+                width="520"
+                height="350"
+              />
+
+              <!-- Previous / Next Controls -->
+              <button
+                class="gallery-modal__nav gallery-modal__nav--prev"
+                data-modal-prev
+                aria-label="Previous photo"
+              >
+                ◀
+              </button>
+              <button
+                class="gallery-modal__nav gallery-modal__nav--next"
+                data-modal-next
+                aria-label="Next photo"
+              >
+                ▶
+              </button>
+            </div>
+
+            <!-- Caption and Page Indicator -->
+            <div class="gallery-modal__meta">
+              <h3 class="gallery-modal__title" data-modal-title>The Gathering</h3>
+              <p class="gallery-modal__caption" data-modal-caption>
+                Attendees kicking off the day at WCE.
+              </p>
+              <span class="gallery-modal__counter" data-modal-counter>1 / 5</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ STOP 4: about us ============ -->
       <section id="about-us" class="stop stop--plum">
         <div class="mist" aria-hidden="true"></div>
         <div class="container about">
@@ -481,7 +868,7 @@
                 alt=""
                 width="73"
                 height="120"
-              />Stop 3: about us
+              />Stop 4: about us
             </p>
             <h2 class="stop__title">Meet the team</h2>
             <p class="stop__text">
@@ -506,7 +893,7 @@
         </div>
       </section>
 
-      <!-- ============ STOP 4: FAQ ============ -->
+      <!-- ============ STOP 5: FAQ ============ -->
       <section id="faq" class="stop stop--night">
         <div class="mist" aria-hidden="true"></div>
         <div class="container faq">
@@ -518,7 +905,7 @@
                 alt=""
                 width="73"
                 height="120"
-              />Stop 4: questions
+              />Stop 5: questions
             </p>
             <h2 class="stop__title">Ask the crystal ball</h2>
             <img
@@ -565,7 +952,7 @@
         </div>
       </section>
 
-      <!-- ============ STOP 5: events ============ -->
+      <!-- ============ STOP 6: events ============ -->
       <section id="events" class="stop stop--plum">
         <div class="mist" aria-hidden="true"></div>
         <div class="container">
@@ -576,7 +963,7 @@
               alt=""
               width="73"
               height="120"
-            />Stop 5: events
+            />Stop 6: events we conduct
           </p>
           <h2 class="stop__title">The events we conduct</h2>
           <p class="stop__text">

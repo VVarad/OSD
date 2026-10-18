@@ -1,0 +1,12 @@
+{
+  "name": "osd-2k26",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.0",
+    "dotenv": "^16.4.0",
+    "cors": "^2.8.5",
+    "express-rate-limit": "^7.0.0"
+  }
+}

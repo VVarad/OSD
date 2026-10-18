@@ -17,8 +17,8 @@ emailRouter.post(
   async (req, res) => {
     const data = req.validatedData;
 
-    if (!env.EMAIL_USER || !env.EMAIL_APP_PASSWORD) {
-      console.error('[Email API] EMAIL_USER or EMAIL_APP_PASSWORD not set.');
+    if (!env.SMTP_HOST || !env.SMTP_USER || !env.SMTP_PASSWORD) {
+      console.error('[Email API] SMTP_HOST, SMTP_USER or SMTP_PASSWORD not set.');
       return res.status(500).json({
         success: false,
         message: 'Email service is not configured on the server.',
@@ -30,15 +30,15 @@ emailRouter.post(
       const textContent = generateRegistrationEmailText(data);
 
       const senderAddress = env.EMAIL_FROM_NAME
-        ? `"${env.EMAIL_FROM_NAME}" <${env.EMAIL_USER}>`
-        : env.EMAIL_USER;
+        ? `"${env.EMAIL_FROM_NAME}" <${env.SMTP_USER}>`
+        : env.SMTP_USER;
 
       console.log(`[Email API] Sending OSD 2K26 confirmation to ${data.email} (${data.pass_id})...`);
 
       const info = await transporter.sendMail({
         from: senderAddress,
         to: data.email,
-        subject: 'Welcome to OSD 2K26! Your Registration is Confirmed 🚀',
+        subject: 'Open Source Day 2k26 - Registration Confirmed!',
         html: htmlContent,
         text: textContent,
       });
@@ -51,7 +51,6 @@ emailRouter.post(
         passId: data.pass_id,
       });
     } catch (err) {
-      // Securely log internal error details on the server without exposing to client
       console.error('[Email API] Delivery error:', {
         message: err.message,
         code: err.code,
@@ -59,7 +58,6 @@ emailRouter.post(
         command: err.command,
       });
 
-      // Handle specific SMTP error categories
       if (err.code === 'EAUTH' || err.responseCode === 535) {
         return res.status(502).json({
           success: false,
@@ -81,7 +79,6 @@ emailRouter.post(
         });
       }
 
-      // Safe fallback error response
       return res.status(500).json({
         success: false,
         message: 'Could not send confirmation email due to an internal mail service issue.',

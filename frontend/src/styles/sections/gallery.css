@@ -1,0 +1,600 @@
+/* ========================================================
+   GALLERY SECTION: The Hall of Memories
+   Pinned Salon Wall Exhibition + Lightbox Slider
+   ======================================================== */
+
+.gallery-section {
+  position: relative;
+  width: 100%;
+  background: radial-gradient(ellipse 90% 70% at 50% 45%, #180d34 0%, #0e081f 65%, #070311 100%);
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 40px 0 50px;
+}
+
+/* Atmospheric ambient glow */
+.gallery-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.gallery-glow--purple {
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(700px, 90vw);
+  height: min(700px, 90vw);
+  background: radial-gradient(
+    circle,
+    rgba(138, 77, 255, 0.2) 0%,
+    rgba(88, 28, 135, 0.1) 45%,
+    transparent 70%
+  );
+  filter: blur(140px);
+}
+
+.gallery-glow--amber {
+  bottom: 12%;
+  left: 35%;
+  width: min(400px, 70vw);
+  height: min(400px, 70vw);
+  background: radial-gradient(
+    circle,
+    rgba(255, 122, 0, 0.15) 0%,
+    rgba(217, 119, 6, 0.06) 50%,
+    transparent 70%
+  );
+  filter: blur(95px);
+}
+
+/* Section Header */
+.gallery-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery-header .stop__label {
+  justify-content: center;
+}
+
+.gallery-header .stop__title {
+  margin-bottom: 12px;
+}
+
+.gallery-header .stop__text,
+.gallery-subtitle {
+  color: var(--c-text-muted);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  max-width: 56ch;
+  margin-inline: auto;
+}
+
+/* Pinned Salon Wall Board / Canvas */
+.gallery-wall-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  margin-top: 90px;
+  display: flex;
+  justify-content: center;
+  padding-inline: 16px;
+  overflow: visible;
+}
+
+/* Grand Salon Wall Board */
+.gallery-wall-frame {
+  position: relative;
+  width: 940px;
+  height: 620px;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 50% 32%, rgba(255, 180, 50, 0.09) 0%, transparent 60%),
+    radial-gradient(circle at 18% 78%, rgba(138, 77, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 82% 78%, rgba(255, 122, 0, 0.08) 0%, transparent 50%),
+    linear-gradient(145deg, #160e29 0%, #0d071b 50%, #060210 100%);
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.95),
+    0 0 50px rgba(255, 122, 0, 0.15),
+    inset 0 0 100px rgba(0, 0, 0, 0.92);
+  touch-action: none;
+  flex-shrink: 0;
+  transform: scale(0.66) !important;
+  transform-origin: top center !important;
+  margin-bottom: -210px !important;
+}
+
+/* Master Rectangular Frame Overlay (Replacing the outer bounding rectangle) */
+.gallery-wall-master-frame {
+  position: absolute;
+  top: -130px;
+  left: -190px;
+  width: 1320px !important;
+  max-width: none !important;
+  height: 885px !important;
+  max-height: none !important;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 25;
+  filter: drop-shadow(0 25px 60px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(255, 122, 0, 0.22));
+}
+
+/* Individual Floating Portrait Item */
+.gallery-portrait {
+  position: absolute;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.85));
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
+    filter 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+/* Hanging Pin (stud that pins portrait to the board) */
+.gallery-portrait__pin {
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #fff9d6 0%,
+    #ffd700 40%,
+    #b8860b 80%,
+    #59400f 100%
+  );
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.8),
+    0 0 8px rgba(255, 215, 0, 0.6);
+  z-index: 22;
+  pointer-events: none;
+}
+
+/* Centerpiece Portrait (Dumbledore position) */
+.gallery-portrait[data-centerpiece='true'] {
+  z-index: 15;
+  filter: drop-shadow(0 20px 42px rgba(0, 0, 0, 0.9)) drop-shadow(0 0 24px rgba(255, 122, 0, 0.28));
+}
+
+.gallery-portrait:hover {
+  z-index: 55 !important;
+  transform: scale(1.08) translateY(-4px) !important;
+  filter: drop-shadow(0 22px 50px rgba(0, 0, 0, 0.98))
+    drop-shadow(0 0 32px rgba(255, 190, 50, 0.55));
+}
+
+.gallery-portrait:active,
+.gallery-portrait.is-dragging {
+  cursor: grabbing;
+  transform: scale(0.98);
+}
+
+/* Anti-gravity float wrapper that executes subtle bobbing & rotation drift */
+.gallery-portrait__float {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation:
+    portrait-float var(--float-dur, 6s) ease-in-out infinite alternate,
+    portrait-rot calc(var(--float-dur, 6s) * 1.25) ease-in-out infinite alternate;
+}
+
+@keyframes portrait-float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(calc(var(--float-dist, 6px) * -1));
+  }
+  100% {
+    transform: translateY(calc(var(--float-dist, 6px) * 0.7));
+  }
+}
+
+@keyframes portrait-rot {
+  0% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: var(--rot-drift, 0.9deg);
+  }
+  100% {
+    rotate: calc(var(--rot-drift, 0.9deg) * -1);
+  }
+}
+
+/* Inner Photo Layer */
+.gallery-portrait__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  z-index: 10;
+  background-color: #0c071a;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.75);
+}
+
+.gallery-portrait__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  pointer-events: none;
+  user-select: none;
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
+  filter: contrast(1.04) saturate(1.08) brightness(1.02);
+}
+
+.gallery-portrait:hover .gallery-portrait__photo img {
+  transform: scale(1.06);
+  filter: contrast(1.08) saturate(1.15) brightness(1.08);
+}
+
+/* ========================================================
+   ORNATE FRAME STYLING (Grand Salon Mode - Reference Look)
+   ======================================================== */
+
+.gallery-portrait__bezel {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Ornate Gilded Gold Baroque Frame */
+.gallery-portrait[data-frame='gold'] .gallery-portrait__bezel {
+  border: 7px solid #d4af37;
+  border-image: linear-gradient(
+      135deg,
+      #ffe28a 0%,
+      #d4af37 25%,
+      #8b6508 50%,
+      #f3d078 75%,
+      #5c430e 100%
+    )
+    8;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.85),
+    inset 0 0 0 2px #fff3bf,
+    inset 0 0 0 4px #5a3e0b,
+    inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Ornate Antique Silver Baroque Frame (Grand Centerpiece) */
+.gallery-portrait[data-frame='silver'] .gallery-portrait__bezel {
+  border: 9px solid #b0b8c2;
+  border-image: linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #c4cbd4 25%,
+      #606770 50%,
+      #e1e5eb 75%,
+      #2c3036 100%
+    )
+    9;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.95),
+    0 0 25px rgba(200, 220, 255, 0.25),
+    inset 0 0 0 2px #ffffff,
+    inset 0 0 0 5px #262a30,
+    inset 0 0 14px rgba(0, 0, 0, 0.85);
+}
+
+/* Ornate Antique Bronze Frame */
+.gallery-portrait[data-frame='bronze'] .gallery-portrait__bezel {
+  border: 7px solid #9c6e3b;
+  border-image: linear-gradient(
+      135deg,
+      #cca87c 0%,
+      #9c6e3b 25%,
+      #523516 50%,
+      #b88f5d 75%,
+      #3b2209 100%
+    )
+    8;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.85),
+    inset 0 0 0 2px #e3cbb1,
+    inset 0 0 0 4px #42260d,
+    inset 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Ornate Frame Corner Filigree Accents */
+.gallery-portrait__bezel::before,
+.gallery-portrait__bezel::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ffd700;
+  pointer-events: none;
+}
+
+.gallery-portrait[data-frame='silver'] .gallery-portrait__bezel::before,
+.gallery-portrait[data-frame='silver'] .gallery-portrait__bezel::after {
+  border-color: #ffffff;
+}
+
+.gallery-portrait[data-frame='bronze'] .gallery-portrait__bezel::before,
+.gallery-portrait[data-frame='bronze'] .gallery-portrait__bezel::after {
+  border-color: #cca87c;
+}
+
+.gallery-portrait__bezel::before {
+  top: -3px;
+  left: -3px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.gallery-portrait__bezel::after {
+  bottom: -3px;
+  right: -3px;
+  border-left: none;
+  border-top: none;
+}
+
+/* ========================================================
+   LIGHTBOX SLIDER MODAL
+   ======================================================== */
+
+.gallery-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+
+.gallery-modal.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.gallery-modal__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 480px;
+  width: 100%;
+  transform: scale(0.85) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.18, 0.9, 0.25, 1.15);
+}
+
+.gallery-modal.is-open .gallery-modal__content {
+  transform: scale(1) translateY(0);
+}
+
+/* Close Button */
+.gallery-modal__close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  background: none;
+  border: none;
+  color: rgba(254, 240, 138, 0.85);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  transition:
+    color 0.18s ease,
+    transform 0.18s ease,
+    background 0.18s ease;
+}
+
+.gallery-modal__close:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+/* Viewport for the Slider Frame */
+.gallery-modal__viewport {
+  position: relative;
+  width: 320px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.95));
+}
+
+@media (min-width: 640px) {
+  .gallery-modal__viewport {
+    width: 520px;
+    height: 350px;
+  }
+}
+
+/* Sliding Photo Mask: sits precisely inside the clay frame opening */
+.gallery-modal__mask {
+  position: absolute;
+  width: 74%;
+  height: 67%;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.6);
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.gallery-modal__mask:active {
+  cursor: grabbing;
+}
+
+.gallery-modal__slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-modal__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.85, 0.3, 1),
+    opacity 0.25s ease;
+  will-change: transform, opacity;
+}
+
+/* Bezel overlay stays static in the center */
+.gallery-modal__bezel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* Left / Right Controls */
+.gallery-modal__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(22, 12, 40, 0.88);
+  border: 1px solid rgba(138, 77, 255, 0.35);
+  color: #ffd15c;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 30;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.gallery-modal__nav:hover {
+  background: rgba(45, 26, 77, 0.95);
+  border-color: rgba(255, 123, 28, 0.6);
+  color: #ffffff;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 8px 24px rgba(255, 123, 28, 0.3);
+}
+
+.gallery-modal__nav--prev {
+  left: -16px;
+}
+
+.gallery-modal__nav--next {
+  right: -16px;
+}
+
+@media (min-width: 768px) {
+  .gallery-modal__nav {
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+  }
+  .gallery-modal__nav--prev {
+    left: -58px;
+  }
+  .gallery-modal__nav--next {
+    right: -58px;
+  }
+}
+
+/* Caption and Page Indicator */
+.gallery-modal__meta {
+  text-align: center;
+  margin-top: 22px;
+  z-index: 30;
+  max-width: 380px;
+}
+
+.gallery-modal__title {
+  font-family: var(--font-display), 'Georgia', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fef08a;
+}
+
+.gallery-modal__caption {
+  font-size: 0.92rem;
+  color: rgba(216, 180, 254, 0.85);
+  margin-top: 6px;
+  line-height: 1.45;
+}
+
+.gallery-modal__counter {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(75, 35, 144, 0.45);
+  border: 1px solid rgba(138, 77, 255, 0.25);
+  color: #c9a8ff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+/* Pause animations when offscreen */
+.is-offscreen .gallery-portrait__float {
+  animation-play-state: paused !important;
+}
+
+/* Responsive scaling for tablet & mobile so the framed wall stays intact */
+@media (max-width: 900px) {
+  .gallery-wall-frame {
+    transform: scale(0.5) !important;
+    margin-bottom: -310px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-wall-frame {
+    transform: scale(0.35) !important;
+    margin-bottom: -400px !important;
+  }
+}

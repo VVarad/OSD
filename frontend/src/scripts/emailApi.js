@@ -3,11 +3,7 @@
  * Sends registration confirmation emails through the Node.js Nodemailer backend.
  */
 
-const BACKEND_URL = (
-  import.meta.env?.VITE_BACKEND_URL ||
-  import.meta.env?.VITE_EMAIL_API_URL ||
-  'http://localhost:5000'
-)
+const BACKEND_URL = (import.meta.env?.VITE_BACKEND_URL || import.meta.env?.VITE_EMAIL_API_URL || '')
   .trim()
   .replace(/\/+$/, '');
 

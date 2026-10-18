@@ -108,6 +108,11 @@
   outline: 3px solid var(--c-candle);
   outline-offset: 4px;
 }
+/* Keep the ::after overlay below any interactive children that might be added inside the body */
+.event-card__body {
+  position: relative;
+  z-index: 2;
+}
 
 .event-card__toggle {
   padding: 0;
@@ -117,16 +122,24 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
+  /* Reset: the card itself is now the full click target */
 }
 .event-card__toggle:focus-visible {
   outline: none;
 }
-/* the whole card is the click target */
-.event-card__toggle::after {
+
+/* ------------------------------------------------------------------
+ * The whole card face is the click target.
+ * We put the overlay on .event-card (position: relative) so it sits
+ * above all flex-children without fighting their stacking order.
+ * ------------------------------------------------------------------ */
+.event-card::after {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: inherit;
+  cursor: pointer;
+  z-index: 1;
 }
 
 .event-card__hint {

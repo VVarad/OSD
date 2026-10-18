@@ -284,27 +284,59 @@
 }
 
 @media (max-width: 700px) {
-  /* On phones the signs sit in a row under the picture instead of over the houses. */
+  /*
+   * Layout on phones:
+   *
+   *  ┌──────────────────────────────┐  order 0 — village frame (image)
+   *  │  [Sign 1]        [Sign 2]    │  order 1 & 2 — both signs in one row
+   *  ├──────────────────────────────┤
+   *  │  details panel (whichever    │  order 3 — whichever scroll is visible
+   *  │  session is open)            │
+   *  └──────────────────────────────┘
+   *
+   * Both signs always stay together. The details area sits entirely below
+   * them, so opening session 1 never pushes session 2's sign downward.
+   */
   .village__stage {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between; /* each sign sits under its own house */
+    justify-content: space-between;
     gap: 14px;
     padding-inline: 2%;
   }
   .village__frame {
     flex: 0 0 100%;
+    order: 0;
     margin-inline: -2%;
   }
+  /* Both signs share order 1 — they sit side by side in the same flex row */
   .sign {
     position: relative;
     inset: auto;
     translate: none;
-    padding: 7px 12px 8px;
+    padding: 7px 10px 8px;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: calc(50% - 7px);
+    order: 1;
+  }
+  .sign--one,
+  .sign--two {
+    order: 1;
+  }
+  .sign__kicker {
+    font-size: 0.75rem;
   }
   .sign__title {
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
+  /* Both scroll panels sit after the sign row (order 3).
+     Only one is visible at a time (the other has [hidden]), so the
+     details area never shifts the signs. */
   .scroll,
   .scroll--one,
   .scroll--two {
@@ -318,6 +350,7 @@
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    order: 3;
     margin-top: 6px;
     padding: 18px 20px;
     border-radius: 18px;
