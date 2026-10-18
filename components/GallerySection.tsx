@@ -39,7 +39,8 @@ const GALLERY_ITEMS: GalleryPhoto[] = [
     id: "mem-2",
     imageSrc: "/gallery/event-2.webp",
     title: "Microservices Workshop",
-    caption: "Hands-on microservice architectures, containers, and deployments.",
+    caption:
+      "Hands-on microservice architectures, containers, and deployments.",
     frameSrc: "/frames/frame-oval.webp",
     frameStyle: "gold",
     width: 200,
@@ -53,7 +54,8 @@ const GALLERY_ITEMS: GalleryPhoto[] = [
     id: "mem-3",
     imageSrc: "/gallery/event-3.webp",
     title: "Git & GitHub Labs",
-    caption: "Demystifying commits, branching, pull requests, and interactive rebasing.",
+    caption:
+      "Demystifying commits, branching, pull requests, and interactive rebasing.",
     frameSrc: "/frames/frame-gothic.webp",
     frameStyle: "gold",
     width: 165,
@@ -209,7 +211,10 @@ export default function GallerySection() {
   };
 
   return (
-    <section id="gallery" className="relative w-full min-h-[110vh] bg-[#0E081F] overflow-hidden select-none py-16 px-4">
+    <section
+      id="gallery"
+      className="relative w-full min-h-[110vh] bg-[#0E081F] overflow-hidden select-none py-16 px-4"
+    >
       {/* Background glow effects */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-purple-900/20 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 left-1/3 w-[450px] h-[450px] bg-amber-600/10 rounded-full blur-[100px] pointer-events-none" />
@@ -250,9 +255,6 @@ export default function GallerySection() {
           {GALLERY_ITEMS.map((item, index) => (
             <motion.div
               key={item.id}
-              drag
-              dragConstraints={containerRef}
-              dragElastic={0.2}
               whileHover={{ scale: 1.08, y: -4, zIndex: 55 }}
               whileTap={{ scale: 0.98 }}
               animate={{
@@ -293,7 +295,8 @@ export default function GallerySection() {
                 <img
                   src={item.imageSrc}
                   alt={item.title}
-                  className="w-full h-full object-cover object-[center_25%] pointer-events-none transition-transform duration-300 hover:scale-105"
+                  draggable={false}
+                  className="w-full h-full object-cover object-[center_25%] pointer-events-none select-none transition-transform duration-300 hover:scale-105"
                 />
               </div>
 
@@ -303,8 +306,8 @@ export default function GallerySection() {
                   item.frameStyle === "silver"
                     ? "border-[9px] border-[#b0b8c2] shadow-[0_18px_45px_rgba(0,0,0,0.95),0_0_25px_rgba(200,220,255,0.25),inset_0_0_0_2px_#ffffff,inset_0_0_0_5px_#262a30,inset_0_0_14px_rgba(0,0,0,0.85)]"
                     : item.frameStyle === "bronze"
-                    ? "border-[7px] border-[#9c6e3b] shadow-[0_12px_28px_rgba(0,0,0,0.85),inset_0_0_0_2px_#e3cbb1,inset_0_0_0_4px_#42260d,inset_0_0_10px_rgba(0,0,0,0.8)]"
-                    : "border-[7px] border-[#d4af37] shadow-[0_12px_28px_rgba(0,0,0,0.85),inset_0_0_0_2px_#fff3bf,inset_0_0_0_4px_#5a3e0b,inset_0_0_10px_rgba(0,0,0,0.8)]"
+                      ? "border-[7px] border-[#9c6e3b] shadow-[0_12px_28px_rgba(0,0,0,0.85),inset_0_0_0_2px_#e3cbb1,inset_0_0_0_4px_#42260d,inset_0_0_10px_rgba(0,0,0,0.8)]"
+                      : "border-[7px] border-[#d4af37] shadow-[0_12px_28px_rgba(0,0,0,0.85),inset_0_0_0_2px_#fff3bf,inset_0_0_0_4px_#5a3e0b,inset_0_0_10px_rgba(0,0,0,0.8)]"
                 }`}
               />
             </motion.div>
@@ -343,7 +346,11 @@ export default function GallerySection() {
               <div className="relative w-[320px] h-[220px] md:w-[520px] md:h-[350px] flex items-center justify-center filter drop-shadow-[0_20px_50px_rgba(0,0,0,0.9)]">
                 {/* Sliding Photo Mask */}
                 <div className="absolute w-[74%] h-[67%] rounded-sm overflow-hidden z-10 bg-black/50">
-                  <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                  <AnimatePresence
+                    initial={false}
+                    custom={direction}
+                    mode="popLayout"
+                  >
                     <motion.img
                       key={selectedIndex}
                       src={GALLERY_ITEMS[selectedIndex].imageSrc}
@@ -353,14 +360,8 @@ export default function GallerySection() {
                       initial="enter"
                       animate="center"
                       exit="exit"
-                      drag="x"
-                      dragConstraints={{ left: 0, right: 0 }}
-                      dragElastic={0.4}
-                      onDragEnd={(_, info) => {
-                        if (info.offset.x > 80) paginate(-1);
-                        else if (info.offset.x < -80) paginate(1);
-                      }}
-                      className="w-full h-full object-cover cursor-grab active:cursor-grabbing"
+                      draggable={false}
+                      className="w-full h-full object-cover select-none pointer-events-none"
                     />
                   </AnimatePresence>
                 </div>

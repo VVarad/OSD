@@ -105,7 +105,7 @@
     0 35px 100px rgba(0, 0, 0, 0.95),
     0 0 50px rgba(255, 122, 0, 0.15),
     inset 0 0 100px rgba(0, 0, 0, 0.92);
-  touch-action: none;
+  touch-action: pan-y;
   flex-shrink: 0;
   transform: scale(0.66) !important;
   transform-origin: top center !important;
@@ -130,7 +130,7 @@
 /* Individual Floating Portrait Item */
 .gallery-portrait {
   position: absolute;
-  cursor: grab;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -178,9 +178,7 @@
     drop-shadow(0 0 32px rgba(255, 190, 50, 0.55));
 }
 
-.gallery-portrait:active,
-.gallery-portrait.is-dragging {
-  cursor: grabbing;
+.gallery-portrait:active {
   transform: scale(0.98);
 }
 
@@ -241,6 +239,8 @@
   object-position: center 25%;
   pointer-events: none;
   user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
   transition:
     transform 0.4s ease,
     filter 0.4s ease;
@@ -453,12 +453,7 @@
   overflow: hidden;
   z-index: 10;
   background-color: rgba(0, 0, 0, 0.6);
-  cursor: grab;
   touch-action: pan-y;
-}
-
-.gallery-modal__mask:active {
-  cursor: grabbing;
 }
 
 .gallery-modal__slider {

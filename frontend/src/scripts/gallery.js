@@ -97,8 +97,8 @@ export const GALLERY_ITEMS = [
   {
     id: 'mem-7',
     imageSrc: '/gallery/event-7.webp',
-    title: 'The Mentorship Circle',
-    caption: 'Senior engineers guiding newcomers through their first contributions.',
+    title: 'The Learning Circle',
+    caption: 'Guiding newcomers through their first contributions.',
     frameSrc: '/frames/frame-square.webp',
     frameStyle: 'bronze',
     width: 165,
@@ -158,72 +158,12 @@ export function initGallery(root) {
   let currentIndex = 0;
   let isAnimating = false;
 
-  // Set up dragging on floating portraits
+  // Set up click listeners on floating portraits to open lightbox
   const portraits = canvas.querySelectorAll('[data-gallery-item]');
   portraits.forEach((portrait, index) => {
-    let startX = 0;
-    let startY = 0;
-    let initialLeft = 0;
-    let initialTop = 0;
-    let hasDragged = false;
-    let isDragging = false;
-
-    portrait.addEventListener('pointerdown', (e) => {
-      // Only primary mouse button or touch
-      if (e.button !== 0) return;
-      isDragging = true;
-      hasDragged = false;
-      startX = e.clientX;
-      startY = e.clientY;
-
-      const rect = portrait.getBoundingClientRect();
-      const parentRect = canvas.getBoundingClientRect();
-      initialLeft = rect.left - parentRect.left;
-      initialTop = rect.top - parentRect.top;
-
-      portrait.setPointerCapture(e.pointerId);
+    portrait.addEventListener('click', () => {
+      openLightbox(index);
     });
-
-    portrait.addEventListener('pointermove', (e) => {
-      if (!isDragging) return;
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-
-      if (!hasDragged && Math.hypot(dx, dy) > 6) {
-        hasDragged = true;
-        portrait.classList.add('is-dragging');
-        portrait.style.left = `${initialLeft}px`;
-        portrait.style.top = `${initialTop}px`;
-      }
-
-      if (hasDragged) {
-        const newX = initialLeft + dx;
-        const newY = initialTop + dy;
-        portrait.style.left = `${newX}px`;
-        portrait.style.top = `${newY}px`;
-      }
-    });
-
-    const finishDrag = (e) => {
-      if (!isDragging) return;
-      isDragging = false;
-      portrait.classList.remove('is-dragging');
-      try {
-        if (portrait.hasPointerCapture(e.pointerId)) {
-          portrait.releasePointerCapture(e.pointerId);
-        }
-      } catch {
-        // Pointer capture release safeguard
-      }
-
-      // If user simply clicked (no significant movement), open lightbox
-      if (!hasDragged) {
-        openLightbox(index);
-      }
-    };
-
-    portrait.addEventListener('pointerup', finishDrag);
-    portrait.addEventListener('pointercancel', finishDrag);
   });
 
   function updateModalMeta(idx) {
@@ -353,7 +293,7 @@ export function initGallery(root) {
     let diffX = 0;
 
     modalMask.addEventListener('pointerdown', (e) => {
-      if (e.button !== 0 || isAnimating) return;
+      if (e.pointerType === 'mouse' || e.button !== 0 || isAnimating) return;
       isMaskDragging = true;
       diffX = 0;
       maskStartX = e.clientX;

@@ -113,8 +113,8 @@ const GALLERY_ITEMS: GalleryPhoto[] = [
   {
     id: 'mem-7',
     imageSrc: '/gallery/event-7.webp',
-    title: 'The Mentorship Circle',
-    caption: 'Senior engineers guiding newcomers through their first contributions.',
+    title: 'The Learning Circle',
+    caption: 'Guiding newcomers through their first contributions.',
     frameSrc: '/frames/frame-square.webp',
     frameStyle: 'bronze',
     width: 165,
@@ -250,9 +250,6 @@ export default function GallerySection() {
           {GALLERY_ITEMS.map((item, index) => (
             <motion.div
               key={item.id}
-              drag
-              dragConstraints={containerRef}
-              dragElastic={0.2}
               whileHover={{ scale: 1.08, y: -4, zIndex: 55 }}
               whileTap={{ scale: 0.98 }}
               animate={{
@@ -293,7 +290,8 @@ export default function GallerySection() {
                 <img
                   src={item.imageSrc}
                   alt={item.title}
-                  className="w-full h-full object-cover object-[center_25%] pointer-events-none transition-transform duration-300 hover:scale-105"
+                  draggable={false}
+                  className="w-full h-full object-cover object-[center_25%] pointer-events-none select-none transition-transform duration-300 hover:scale-105"
                 />
               </div>
 
@@ -353,14 +351,8 @@ export default function GallerySection() {
                       initial="enter"
                       animate="center"
                       exit="exit"
-                      drag="x"
-                      dragConstraints={{ left: 0, right: 0 }}
-                      dragElastic={0.4}
-                      onDragEnd={(_, info) => {
-                        if (info.offset.x > 80) paginate(-1);
-                        else if (info.offset.x < -80) paginate(1);
-                      }}
-                      className="w-full h-full object-cover cursor-grab active:cursor-grabbing"
+                      draggable={false}
+                      className="w-full h-full object-cover select-none pointer-events-none"
                     />
                   </AnimatePresence>
                 </div>
